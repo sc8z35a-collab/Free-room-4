@@ -488,15 +488,21 @@ export class FusedKawaseCinemaPipeline {
     this.renderScale = 1.0;
     this.bloomEnabled = true;
 
+    const gl = renderer.getContext();
+    const supportsHalfFloatRT = Boolean(
+      gl.getExtension('EXT_color_buffer_float') || gl.getExtension('EXT_color_buffer_half_float')
+    );
+    const rtType = supportsHalfFloatRT ? THREE.HalfFloatType : THREE.UnsignedByteType;
+
     const rtOpts = {
-      type: THREE.HalfFloatType,
+      type: rtType,
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       depthBuffer: true,
       stencilBuffer: false,
     };
     const bloomOpts = {
-      type: THREE.HalfFloatType,
+      type: rtType,
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       depthBuffer: false,

@@ -94,10 +94,8 @@ async function enterAutoFullscreenLandscape() {
   }
 }
 
-// Attempt automatic fullscreen immediately where browser policy permits (e.g., kiosk/PWA)
-if (!skipIntro) {
-  enterAutoFullscreenLandscape().catch(() => {});
-}
+// Fullscreen & mobile landscape lock are invoked cleanly inside user gestures
+// (Start tap, Rotate button, Fullscreen button, or first tap on screen).
 
 // --- Ultra-Optimized WebGL2 Renderer & Scene ---
 const maxDpr = isMobile ? 1.5 : Math.min(window.devicePixelRatio || 1, 2);
@@ -237,14 +235,15 @@ function setPlaying(playing) {
   isPlaying = playing;
   btnPlay.textContent = playing ? '⏸' : '▶';
   if (playing) {
-    audio.init();
+    try { audio.init(); } catch {}
     if (currentTime >= FILM_DURATION - 0.1) {
       currentTime = 0;
       audio.resetTimeline(0);
     }
     finOverlay.classList.remove('visible');
-    pokeUI(1600);
+    pokeUI(2800);
   } else {
+    clearTimeout(idleTimer);
     document.body.classList.remove('ui-idle');
   }
 }
@@ -255,7 +254,7 @@ function seekTo(sec) {
   updateSceneAt(currentTime, true);
 }
 
-function pokeUI(delay = 2000) {
+function pokeUI(delay = 3500) {
   document.body.classList.remove('ui-idle');
   clearTimeout(idleTimer);
   if (isPlaying && camModes[camModeIdx] === 'CINEMA') {
@@ -265,38 +264,48 @@ function pokeUI(delay = 2000) {
   }
 }
 
-window.addEventListener('pointermove', () => pokeUI(2000));
+function startFilmFromGesture() {
+  autoFsAttempted = true;
+  enterAutoFullscreenLandscape().catch(() => {});
+  introOverlay.classList.add('hidden');
+  try { audio.init(); } catch {}
+  seekTo(0);
+  setPlaying(true);
+}
+
+window.addEventListener('pointermove', () => pokeUI(3500));
 window.addEventListener('pointerdown', (e) => {
-  // Automatically trigger fullscreen + mobile landscape on the very first gesture!
+  if (!introOverlay.classList.contains('hidden')) return;
   if (!autoFsAttempted && !skipIntro) {
     autoFsAttempted = true;
     enterAutoFullscreenLandscape().catch(() => {});
   }
-  if (e.target === canvas && introOverlay.classList.contains('hidden')) {
-    if (document.body.classList.contains('ui-idle')) pokeUI(2400);
-    else if (isPlaying && camModes[camModeIdx] === 'CINEMA') document.body.classList.add('ui-idle');
+  if (e.target === canvas) {
+    if (document.body.classList.contains('ui-idle')) pokeUI(3500);
+    else if (isPlaying && camModes[camModeIdx] === 'CINEMA') {
+      clearTimeout(idleTimer);
+      document.body.classList.add('ui-idle');
+    }
   } else {
-    pokeUI(2400);
+    pokeUI(3500);
   }
 });
 
 // --- Start, Rotate & Replay Triggers ---
-btnStartFilm.addEventListener('click', () => {
-  autoFsAttempted = true;
-  enterAutoFullscreenLandscape().catch(() => {});
-  introOverlay.classList.add('hidden');
-  audio.init();
-  seekTo(0);
-  setPlaying(true);
+btnStartFilm.addEventListener('click', (e) => {
+  e.stopPropagation();
+  startFilmFromGesture();
+});
+introOverlay.addEventListener('click', () => {
+  startFilmFromGesture();
 });
 
-btnForceLandscape?.addEventListener('click', () => {
-  enterAutoFullscreenLandscape().catch(() => {});
+btnForceLandscape?.addEventListener('click', (e) => {
+  e.stopPropagation();
   if (!introOverlay.classList.contains('hidden')) {
-    introOverlay.classList.add('hidden');
-    audio.init();
-    seekTo(0);
-    setPlaying(true);
+    startFilmFromGesture();
+  } else {
+    enterAutoFullscreenLandscape().catch(() => {});
   }
 });
 
