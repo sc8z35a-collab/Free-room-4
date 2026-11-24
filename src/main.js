@@ -4,6 +4,8 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh06 = document.getElementById('btn-launch-ch06');
+const btnLaunchCh05 = document.getElementById('btn-launch-ch05');
 const btnLaunchCh04 = document.getElementById('btn-launch-ch04');
 const btnLaunchHmd = document.getElementById('btn-launch-hmd');
 const btnLaunchVoxel = document.getElementById('btn-launch-voxel');
@@ -28,6 +30,14 @@ function returnToMainMenuHub() {
   if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
 }
 
+const LOADER_LABELS = {
+  ch06: '次世代マクロ3D『第6章：夏休みの全身組立と、起立不能の重力（02:30）』を構築中…',
+  ch05: '次世代マクロ3D『第5章：深圳から届いた緑の基板（02:30）』を構築中…',
+  ch04: '極限リアル3D『第4章：線形代数の復習と、逆運動学の暴走（02:30）』を構築中…',
+  hmd: '極限リアル3D『HMD-01 開発記 第1章・第2章（10:00）』を構築中…',
+  voxel: '物理破壊ボクセル3D『天地綻びのクロニクル（05:00）』を構築中…',
+};
+
 async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUserGesture = false } = {}) {
   if (launching) return;
   launching = true;
@@ -49,19 +59,28 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent =
-      kind === 'ch04'
-        ? '極限リアル3D『第4章：線形代数の復習と、逆運動学の暴走（02:30）』を構築中…'
-        : kind === 'hmd'
-        ? '極限リアル3D『HMD-01 開発記 第1章・第2章（10:00）』を構築中…'
-        : '物理破壊ボクセル3D『天地綻びのクロニクル（05:00）』を構築中…';
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch06;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch04') {
+    if (kind === 'ch06') {
+      const { mountCh06Film } = await import('./real/ch06/realCh06Film.js');
+      activeSession = mountCh06Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch05') {
+      const { mountCh05Film } = await import('./real/ch05/realCh05Film.js');
+      activeSession = mountCh05Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch04') {
       const { mountCh04Film } = await import('./real/ch04/realCh04Film.js');
       activeSession = mountCh04Film({
         initialTime,
@@ -92,6 +111,14 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   }
 }
 
+btnLaunchCh06?.addEventListener('click', () => {
+  launchFilm('ch06', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+
+btnLaunchCh05?.addEventListener('click', () => {
+  launchFilm('ch05', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+
 btnLaunchCh04?.addEventListener('click', () => {
   launchFilm('ch04', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
@@ -104,10 +131,10 @@ btnLaunchVoxel?.addEventListener('click', () => {
   launchFilm('voxel', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
 
-// Deep-link query params (?film=ch04|hmd|voxel&t=...&paused=1)
+// Deep-link query params (?film=ch06|ch05|ch04|hmd|voxel&t=...&paused=1)
 const params = new URLSearchParams(window.location.search);
 const queryFilm = params.get('film');
-if (queryFilm === 'ch04' || queryFilm === 'hmd' || queryFilm === 'voxel') {
+if (queryFilm && queryFilm in LOADER_LABELS) {
   const initialTime = Math.max(0, Number(params.get('t') || 0));
   const startPaused = params.get('paused') === '1';
   launchFilm(queryFilm, { initialTime, startPaused, fromUserGesture: false });
