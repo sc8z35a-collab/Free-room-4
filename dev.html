@@ -5,19 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#040508" />
-  <title>天地綻びのクロニクル — 05:00 3D Voxel Cinema</title>
+  <meta name="theme-color" content="#ffffff" />
+  <title>3D Cinema Hub — HMD-01 開発記録 (10:00) ／ 天地綻びのクロニクル (05:00)</title>
+  <meta name="description" content="極限フォトリアル3Dで描く『第一世代機 HMD-01 開発記（第1章・第2章／10分）』と、映画級ボクセル物理破壊3Dバトル『天地綻びのクロニクル（5分）』を選択して鑑賞できるリアルタイムWebGL2シネマハブ。" />
   <link rel="stylesheet" href="./src/style.css" />
 </head>
-<body>
-  <div id="app">
-    <canvas id="cinema-canvas"></canvas>
+<body class="hub-active">
+  <!-- ===================================================================== -->
+  <!-- PURE WHITE MAIN MENU HUB (#FFFFFF)                                    -->
+  <!-- ===================================================================== -->
+  <main id="menu-hub" aria-label="作品選択メインメニュー">
+    <div class="hub-container">
+      <header class="hub-header">
+        <p class="hub-eyebrow">REAL-TIME WEBGL2 3D ANIMATION ARCHIVE</p>
+        <h1 class="hub-title">上映作品を選択してください</h1>
+      </header>
+
+      <section class="hub-grid" aria-label="3Dアニメーション作品一覧">
+        <!-- NEW CHAPTER 04: 02:30 ULTRA-PHOTOREALISTIC 12-DOF IK & NaN RUNAWAY -->
+        <article class="hub-card">
+          <div class="card-top">
+            <div class="card-meta-row">
+              <span class="card-index">NEW · 第4章</span>
+              <span class="card-duration">02:30 · 極限リアル3D</span>
+            </div>
+            <h2 class="card-title">HMD-01 開発記 第4章<br /><span class="card-subtitle">線形代数の復習と、逆運動学の暴走（Day 049 – 072）</span></h2>
+            <p class="card-desc">
+              初バイト代で組んだ実測1,042gの12自由度下半身ユニット。直交行列の転置と余弦定理による42μsの解析的逆運動学、午前2時10分のacosf丸め誤差『NaN』暴走と左股関節粉砕、三重フェイルセーフ、そして梅雨の夜の完全接地・骨盤円運動までを描く高密度2分30秒。
+            </p>
+            <dl class="card-chapters">
+              <div><dt>前半</dt><dd>107,920円入金・12軸下半身・余弦定理42μs IK（00:00 – 01:14）</dd></div>
+              <div><dt>後半</dt><dd>NaN暴走粉砕・三重安全壁・接地円運動とKiCad（01:14 – 02:30）</dd></div>
+            </dl>
+          </div>
+          <button id="btn-launch-ch04" class="hub-select-btn primary-btn" type="button">
+            <span class="btn-play-tri">▶</span>
+            <span>『第4章：逆運動学の暴走』を再生（02:30）</span>
+          </button>
+        </article>
+
+        <!-- CHAPTERS 1 & 2: 10-MINUTE ULTRA-PHOTOREALISTIC HMD-01 -->
+        <article class="hub-card">
+          <div class="card-top">
+            <div class="card-meta-row">
+              <span class="card-index">第1章・第2章</span>
+              <span class="card-duration">10:00 · 極限リアル3D</span>
+            </div>
+            <h2 class="card-title">HMD-01 開発記 第1章・第2章<br /><span class="card-subtitle">四月の絶縁体〜最初の白煙（Day 001 – 024）</span></h2>
+            <p class="card-desc">
+              工学部1年・佐伯湊が初期資金18万5千円と6畳一間から独力で二足歩行ロボットに挑む記録。名門ロボ研との決別、秋葉原STS3215選定、1Mbps通信の壁と最初の1軸の反力、16自由度設計、深夜のGND浮きによる最初の白煙と再起までの10分間。
+            </p>
+            <dl class="card-chapters">
+              <div><dt>第1章</dt><dd>四月の絶縁体と、最初の1軸（00:00 – 05:00）</dd></div>
+              <div><dt>第2章</dt><dd>自由度16の皮算用と、最初の白煙（05:00 – 10:00）</dd></div>
+            </dl>
+          </div>
+          <button id="btn-launch-hmd" class="hub-select-btn secondary-btn" type="button">
+            <span class="btn-play-tri">▶</span>
+            <span>『第1章・第2章』を再生（10:00）</span>
+          </button>
+        </article>
+
+        <!-- PREVIOUS 5-MINUTE VOXEL BATTLE CHRONICLE -->
+        <article class="hub-card">
+          <div class="card-top">
+            <div class="card-meta-row">
+              <span class="card-index">前作バトル編</span>
+              <span class="card-duration">05:00 · 物理破壊ボクセル3D</span>
+            </div>
+            <h2 class="card-title">天地綻びのクロニクル<br /><span class="card-subtitle">全12幕・超絶決戦編</span></h2>
+            <p class="card-desc">
+              遠山連続TNT爆破から巨重機TTの領域展開「綻び」、創造主リウの大森林増殖、リリス1世総出の包囲戦、四条気楽・狼まーきリングス・船長モモンガKF23の超巨大ムーン・メテオ、そしてジョセフの翠玉×黄金おらおらラッシュまでを描く5分間。
+            </p>
+            <dl class="card-chapters">
+              <div><dt>前半</dt><dd>遠山TNT爆破〜領域展開「綻び」〜おらおら（00:00 – 03:00）</dd></div>
+              <div><dt>後半</dt><dd>超巨神GIGA-TT〜超巨大隕石粉砕フィナーレ（03:00 – 05:00）</dd></div>
+            </dl>
+          </div>
+          <button id="btn-launch-voxel" class="hub-select-btn secondary-btn" type="button">
+            <span class="btn-play-tri">▶</span>
+            <span>『天地綻びのクロニクル』を再生（05:00）</span>
+          </button>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- SHARED MINIMALIST 3D CINEMA STAGE                                     -->
+  <!-- ===================================================================== -->
+  <div id="cinema-stage" hidden>
+    <div id="canvas-host"></div>
 
     <!-- Dynamic Cinematic Letterbox Bars -->
     <div id="letterbox-top" class="letterbox"></div>
     <div id="letterbox-bottom" class="letterbox"></div>
 
-    <!-- Whisper-Minimal Climax Cut-In -->
+    <!-- Simulation Log Telemetry Overlay (Used by HMD-01 Chapters 1 & 2) -->
+    <div id="simlog-overlay" aria-hidden="true">
+      <div id="simlog-tag"></div>
+      <div id="simlog-title"></div>
+      <div id="simlog-detail"></div>
+    </div>
+
+    <!-- Dramatic Climax Cut-In -->
     <div id="cutin-layer" aria-hidden="true">
       <div id="cutin-stripe">
         <div id="cutin-kicker"></div>
@@ -26,58 +117,56 @@
       </div>
     </div>
 
-    <!-- Borderless Cinema Subtitles -->
+    <!-- Borderless Theatrical Cinema Subtitles -->
     <div id="subtitle-wrap">
       <span id="subtitle-speaker"></span>
       <span id="subtitle-text"></span>
     </div>
 
-    <!-- Fake-Out "To Be Continued" (2:57-2:59) & Final "完" (4:57-5:00) -->
+    <!-- Fake-Out "To Be Continued" & Final Completion Screen -->
     <div id="tbc-overlay" aria-hidden="true">
       <div class="tbc-arrow">To Be Continued</div>
     </div>
 
     <div id="fin-overlay" aria-hidden="true">
-      <div class="fin-mark">完</div>
-      <button id="btn-replay" class="ghost-pill" aria-label="もう一度再生">↺</button>
+      <div id="fin-mark" class="fin-mark">完</div>
+      <div id="fin-sub" class="fin-sub"></div>
+      <div class="fin-actions">
+        <button id="btn-replay" class="fin-btn" type="button">↺ もう一度再生</button>
+        <button id="btn-fin-hub" class="fin-btn" type="button">⌂ メインメニューへ戻る</button>
+      </div>
     </div>
 
-    <!-- Ultra-Minimal Opening Tap Curtain (1 Tap -> Auto-Fullscreen + Landscape + Audio!) -->
-    <div id="intro-overlay">
-      <div class="intro-inner">
-        <h1 class="intro-title">天地綻びのクロニクル</h1>
-        <div class="intro-meta">05:00 · 3D VOXEL CINEMA</div>
-        <button id="btn-start-film" class="play-orb" aria-label="再生開始">
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </button>
-      </div>
+    <!-- Loading Indicator while Compiling Shaders / IBL -->
+    <div id="stage-loader" aria-hidden="true">
+      <div class="loader-spinner"></div>
+      <div id="loader-text" class="loader-text">3Dシーンを構築中…</div>
     </div>
 
     <!-- Mobile Portrait Orientation Hint (Auto-hides in Landscape) -->
     <div id="rotate-hint" aria-hidden="true">
       <div class="rotate-phone"></div>
       <div class="rotate-label">横画面推奨</div>
-      <button id="btn-force-landscape" class="rotate-btn">全画面・横向きで観る</button>
+      <button id="btn-force-landscape" class="rotate-btn" type="button">全画面・横向きで観る</button>
     </div>
 
-    <!-- Ultra-Minimalist Floating Controls (Auto-vanish completely during playback!) -->
+    <!-- Ultra-Minimalist Top-Right Floating Controls (Auto-vanish during playback!) -->
     <div id="mini-corner" class="cinema-hud">
-      <button id="btn-play" class="icon-btn" title="再生/停止 (Space)" aria-label="再生/停止">⏸</button>
-      <button id="btn-cam-mode" class="icon-btn" title="カメラ切替 (C)" aria-label="カメラ切替">◎</button>
-      <button id="btn-mute" class="icon-btn" title="音声切替 (M)" aria-label="音声切替">🔊</button>
-      <button id="btn-record" class="icon-btn rec-btn" title="60fps WebM録画" aria-label="録画">●</button>
-      <button id="btn-fullscreen" class="icon-btn" title="全画面 (F)" aria-label="全画面">⛶</button>
+      <button id="btn-back-hub" class="icon-btn" title="メインメニューへ戻る" aria-label="メインメニューへ戻る" type="button">⌂</button>
+      <button id="btn-play" class="icon-btn" title="再生/停止 (Space)" aria-label="再生/停止" type="button">⏸</button>
+      <button id="btn-cam-mode" class="icon-btn" title="カメラ切替 (C)" aria-label="カメラ切替" type="button">◎</button>
+      <button id="btn-mute" class="icon-btn" title="音声切替 (M)" aria-label="音声切替" type="button">🔊</button>
+      <button id="btn-record" class="icon-btn rec-btn" title="60fps WebM録画" aria-label="録画" type="button">●</button>
+      <button id="btn-fullscreen" class="icon-btn" title="全画面 (F)" aria-label="全画面" type="button">⛶</button>
     </div>
 
     <!-- Razor-Thin Floating Bottom Scrub Hairline -->
     <div id="mini-scrub-wrap" class="cinema-hud">
       <div id="scrub-meta">
         <span id="scrub-chapter"></span>
-        <span id="timecode">00:00 / 05:00</span>
+        <span id="timecode">00:00 / 10:00</span>
       </div>
-      <div id="timeline-track" role="slider" aria-label="シークバー" aria-valuemin="0" aria-valuemax="300" aria-valuenow="0" tabindex="0">
+      <div id="timeline-track" role="slider" aria-label="シークバー" aria-valuemin="0" aria-valuemax="600" aria-valuenow="0" tabindex="0">
         <div id="timeline-fill"></div>
         <div id="timeline-chapters"></div>
         <div id="timeline-thumb"></div>
