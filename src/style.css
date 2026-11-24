@@ -86,9 +86,15 @@ body.hub-active {
 
 .hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(14px, 2vw, 22px);
   align-items: stretch;
+}
+
+@media (max-width: 760px) {
+  .hub-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .hub-card {
