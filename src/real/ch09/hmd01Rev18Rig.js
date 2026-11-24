@@ -370,7 +370,7 @@ export function createCh09StoryProps(baseMats, ngMats, aluSplintMat, masterLib =
   // 4. 4-Day Hand-Metalworking Station (Photographic Woven Bath Towel + Blue Desktop Vise + 1.5mm Alu Sheet + Reciprocating Steel File + Greased Steel Gears + Tools!)
   const metalworkGroup = new THREE.Group();
   const bathTowel = masterLib
-    ? masterLib.spawn('tool_bath_towel_folded')
+    ? masterLib.spawn('arch_striped_towel_pad')
     : new THREE.Mesh(makeRoundedBoxGeo(0.28, 0.022, 0.20, 0.006, 2), new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.96 }));
   bathTowel.position.set(-0.04, 0.012, 0);
   metalworkGroup.add(bathTowel);

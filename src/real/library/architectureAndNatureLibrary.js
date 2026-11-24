@@ -334,7 +334,7 @@ export function registerArchitectureAndNatureLibrary(registry, { baseMats, ngMat
     const g = new THREE.Group();
     const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.19, 2.8, 12), pbr.get('treeBarkRealistic', { repeatX: 1, repeatY: 3 }));
     trunk.position.y = 1.4; trunk.castShadow = true;
-    const crown = new THREE.Mesh(new THREE.DodecahedronGeometry(1.42, 1), pbr.get('autumnFallenLeaves', { tint: 0xfde047, repeatX: 2, repeatY: 2 }));
+    const crown = new THREE.Mesh(new THREE.DodecahedronGeometry(1.42, 1), pbr.get('ginkgoLeavesCarpet', { repeatX: 2, repeatY: 2 }));
     crown.position.y = 3.35; crown.castShadow = true;
     g.add(trunk, crown);
     return g;
@@ -379,4 +379,323 @@ export function registerArchitectureAndNatureLibrary(registry, { baseMats, ngMat
     }
     return g;
   });
+
+  // === EXPANSION PACK (ATLASES 16–30): 32 ADDITIONAL PHOTOGRAPHIC URBAN, WORKSHOP & SEASONAL ASSETS (TOTAL = 240 ASSETS!) ===
+  reg('arch_park_bench_green', 'architecture', 'Japanese Park Green Wooden Slat Bench', () => {
+    const g = new THREE.Group();
+    const wood = pbr.get('greenParkBenchWood', { repeatX: 2, repeatY: 1 });
+    const iron = pbr.get('darkSlateMetal', { metalness: 0.78 });
+    const seat = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.05, 0.44), wood); seat.position.y = 0.44;
+    const back = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.38, 0.05), wood); back.position.set(0, 0.74, -0.20); back.rotation.x = -0.14;
+    for (const sx of [-0.66, 0.66]) {
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.44, 0.44), iron); leg.position.set(sx, 0.22, 0); g.add(leg);
+    }
+    g.add(seat, back); return g;
+  });
+  reg('arch_chain_link_fence', 'architecture', 'Galvanized Chain-Link Perimeter Fence', ({ w = 3.2, h = 1.8 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.04), pbr.get('chainLinkFence', { repeatX: 3, repeatY: 2 }));
+    m.position.y = h * 0.5; return m;
+  });
+  reg('arch_cinder_block_wall', 'architecture', 'Japanese Concrete Cinder-Block Alley Wall', ({ w = 3.6, h = 1.6 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.16), pbr.get('concreteCinderBlock', { repeatX: 3, repeatY: 2 }));
+    m.position.y = h * 0.5; m.castShadow = true; m.receiveShadow = true; return m;
+  });
+  reg('arch_wired_glass_window', 'architecture', 'Japanese Wired Frosted Apartment Window', ({ w = 1.48, h = 1.12 } = {}) => {
+    const g = new THREE.Group();
+    const pane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('wiredFrostedGlass', { repeatX: 2, repeatY: 2 }));
+    const frameMat = pbr.get('brushedAluHairline', { metalness: 0.86 });
+    const top = new THREE.Mesh(new THREE.BoxGeometry(w + 0.08, 0.045, 0.05), frameMat); top.position.y = h * 0.5;
+    const bot = top.clone(); bot.position.y = -h * 0.5;
+    const mid = new THREE.Mesh(new THREE.BoxGeometry(0.04, h, 0.05), frameMat);
+    g.add(pane, top, bot, mid); return g;
+  });
+  reg('arch_glass_block_wall', 'architecture', 'Translucent Architectural Glass-Block Partition', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.2, 0.10), pbr.get('architecturalGlassBk', { repeatX: 2, repeatY: 2 }));
+    m.position.y = 1.1; return m;
+  });
+  reg('arch_cork_pinboard_wall', 'architecture', 'Room 203 Cork Design Schedule Pinboard', () => {
+    const g = new THREE.Group();
+    const board = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.54, 0.018), pbr.get('corkPinboard'));
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(0.80, 0.58, 0.012), pbr.get('birchPlywoodSheet')); frame.position.z = -0.004;
+    g.add(frame, board); return g;
+  });
+  reg('arch_osb_pegboard_wall', 'architecture', 'OSB Workshop Tool Backing Board', () => new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.72, 0.018), pbr.get('osbParticleBoard')));
+  reg('arch_birch_plywood_panel', 'architecture', 'Birch Plywood Prototyping Baseboard', () => new THREE.Mesh(new THREE.BoxGeometry(0.90, 0.016, 0.60), pbr.get('birchPlywoodSheet')));
+  reg('arch_interlocking_plaza', 'architecture', 'Hamamatsucho Interlocking Brick Plaza Floor', ({ w = 18, d = 18 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('interlockingBrick', { repeatX: 9, repeatY: 9 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_white_facade_column', 'architecture', 'White Square-Tile Modern Building Column', ({ h = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.85, h, 0.85), pbr.get('whiteFacadeTileGrid', { repeatX: 1, repeatY: 5 }));
+    m.position.y = h * 0.5; return m;
+  });
+  reg('arch_granite_plaza_curb', 'architecture', 'Polished Gray Granite Plaza Step Curb', ({ w = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, 0.16, 0.42), pbr.get('polishedGrayGranite', { repeatX: 4, repeatY: 1 }));
+    m.position.y = 0.08; m.receiveShadow = true; return m;
+  });
+  reg('arch_herringbone_walkway', 'architecture', 'Red Herringbone Brick Campus Path', ({ w = 3.2, d = 14 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('herringboneBrick', { repeatX: 3, repeatY: 12 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_athletic_track_lane', 'architecture', 'Red All-Weather Athletic Sprint Track', ({ w = 3.0, d = 12 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('athleticRunningTrack', { repeatX: 1, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_railroad_tie_steps', 'architecture', 'Timber Railroad-Tie Park Embankment Steps', () => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 4.5), pbr.get('railroadTieSteps', { repeatX: 1, repeatY: 3 }));
+    m.rotation.x = -Math.PI * 0.38; m.position.y = 0.8; return m;
+  });
+  reg('arch_composite_deck_patio', 'architecture', 'Bolted Composite Wood Outdoor Deck', ({ w = 4.0, d = 4.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('compositeDecking', { repeatX: 3, repeatY: 3 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_tree_grate_castiron', 'architecture', 'Cast-Iron Sidewalk Tree-Pit Grate', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.025, 1.15), pbr.get('castIronTreeGrate'));
+    m.position.y = 0.012; m.receiveShadow = true; return m;
+  });
+  reg('arch_steel_chain_barrier', 'architecture', 'Galvanized Steel Chain Perimeter Guard', () => new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 0.04), pbr.get('galvanizedSteelChain', { repeatX: 2, repeatY: 1 })));
+  reg('arch_shoji_sliding_door', 'architecture', 'Traditional Japanese Shoji Paper Screen', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.04, 1.95, 0.92), pbr.get('shojiPaperScreen'));
+    m.position.y = 0.975; return m;
+  });
+  reg('arch_kawara_eave_roof', 'architecture', 'Japanese Kawara Ceramic Tile Eave Roof', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.14, 1.8), pbr.get('kawaraRoofTile', { repeatX: 3, repeatY: 2 }));
+    m.rotation.x = 0.35; return m;
+  });
+  reg('arch_bamboo_garden_fence', 'architecture', 'Bound Natural Bamboo Garden Fence', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.5, 0.08), pbr.get('bambooFenceBound', { repeatX: 2, repeatY: 1 }));
+    m.position.y = 0.75; return m;
+  });
+  reg('arch_gabion_retaining_wall', 'architecture', 'Wire-Cage Gabion Riverbank Retaining Wall', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(3.2, 1.2, 0.65), pbr.get('gabionWireRocks', { repeatX: 2, repeatY: 1 }));
+    m.position.y = 0.6; return m;
+  });
+  reg('arch_corten_rust_planter', 'architecture', 'Weathered Corten-Steel Plaza Planter Box', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.52, 1.4), pbr.get('cortenRustPlate'));
+    m.position.y = 0.26; return m;
+  });
+  reg('arch_grass_grid_parking', 'architecture', 'Eco Concrete Grass-Grid Parking Pad', ({ w = 4.0, d = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('grassGridPavers', { repeatX: 3, repeatY: 4 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_white_clapboard_wall', 'architecture', 'White Painted Horizontal Clapboard Wall', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(4.0, 2.8, 0.14), pbr.get('whiteWoodSiding', { repeatX: 2, repeatY: 2 }));
+    m.position.y = 1.4; return m;
+  });
+  reg('nat_ginkgo_carpet_strip', 'nature', 'Golden Yellow Ginkgo Fallen-Leaves Carpet', ({ w = 2.4, d = 10 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('ginkgoLeavesCarpet', { repeatX: 2, repeatY: 8 }));
+    m.rotation.x = -Math.PI / 2; m.position.y = 0.008; m.receiveShadow = true; return m;
+  });
+  reg('nat_autumn_maple_carpet', 'nature', 'Crimson Japanese Maple Fallen-Leaves Patch', ({ w = 2.0, d = 5.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('autumnMapleLeaves', { repeatX: 2, repeatY: 4 }));
+    m.rotation.x = -Math.PI / 2; m.position.y = 0.008; return m;
+  });
+  reg('nat_sakura_petal_drift', 'nature', 'Spring Cherry Blossom Petals Carpet', ({ w = 2.2, d = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('sakuraPetalsCarpet', { repeatX: 2, repeatY: 5 }));
+    m.rotation.x = -Math.PI / 2; m.position.y = 0.008; return m;
+  });
+  reg('nat_frosted_winter_patch', 'nature', 'Crisp Frosted Winter Grass Embankment', ({ w = 4.0, d = 10 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('frostedWinterGrass', { repeatX: 3, repeatY: 7 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('nat_snow_dusted_ground', 'nature', 'January Light-Snow-Dusted Ground Patch', ({ w = 5.0, d = 10 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('snowDustedGround', { repeatX: 3, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('nat_rain_puddle_patch', 'nature', 'Reflective Rain Puddles on Gravel Ground', ({ w = 2.4, d = 5.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('rainPuddleGravel', { repeatX: 2, repeatY: 4 }));
+    m.rotation.x = -Math.PI / 2; m.position.y = 0.009; m.receiveShadow = true; return m;
+  });
+  reg('nat_wet_autumn_leaves', 'nature', 'Rain-Soaked Glistening Autumn Leaves Patch', ({ w = 1.8, d = 4.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('wetAutumnLeaves', { repeatX: 2, repeatY: 4 }));
+    m.rotation.x = -Math.PI / 2; m.position.y = 0.009; return m;
+  });
+  reg('nat_lotus_pond_surface', 'nature', 'Shimmering Sunlit Lotus Pond Water Surface', ({ w = 6.0, d = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('lotusPondCaustics', { repeatX: 3, repeatY: 3 }));
+    m.rotation.x = -Math.PI / 2; return m;
+  });
+
+  // === EXPANSION PACK 2 (ATLASES 31–45): 30 MORE LIVED-IN APARTMENT, WORKSHOP & NATURAL ASSETS (TOTAL = 270 ASSETS!) ===
+  reg('arch_shoe_cabinet_entry', 'architecture', 'Japanese Wooden Entryway Shoe Cabinet (Getabako)', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.86, 0.96, 0.36), pbr.get('woodenShoeCabinet'));
+    m.position.y = 0.48; m.castShadow = true; return m;
+  });
+  reg('arch_retro_gas_stove', 'architecture', 'Apartment 2-Burner Retro Gas Stove Unit', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.60, 0.85, 0.54), pbr.get('retroGasStoveFront'));
+    m.position.y = 0.425; return m;
+  });
+  reg('arch_mug_cupboard_wall', 'architecture', 'Glass-Door Wooden Mug & Dish Cupboard', () => new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.82, 0.30), pbr.get('glassMugCupboard')));
+  reg('arch_bath_mirror_shelf', 'architecture', 'Apartment Sink Mirror & Toothbrush Shelf', () => new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.72, 0.14), pbr.get('bathMirrorSinkShelf')));
+  reg('arch_apt_parcel_lockers', 'architecture', 'Apartment Entrance Mailboxes & Parcel Lockers', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.48, 0.38), pbr.get('aptParcelLockers'));
+    m.position.y = 0.74; return m;
+  });
+  reg('arch_steel_storage_rack', 'architecture', 'Steel Shelving Rack Stacked with Cardboard Boxes', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.95, 1.65, 0.44), pbr.get('steelRackCardboard'));
+    m.position.y = 0.825; m.castShadow = true; return m;
+  });
+  reg('arch_blue_workshop_locker', 'architecture', 'Weathered Blue Steel Workshop Locker', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.88, 1.72, 0.48), pbr.get('blueWorkshopLocker'));
+    m.position.y = 0.86; m.castShadow = true; return m;
+  });
+  reg('arch_coin_laundry_washer', 'architecture', 'Stainless Front-Load Coin Laundry Machine', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.96, 0.72), pbr.get('coinLaundryWasher'));
+    m.position.y = 0.48; return m;
+  });
+  reg('arch_blue_hand_truck', 'architecture', 'Wheeled Blue Steel Platform Hand Truck', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.82, 0.78), pbr.get('blueHandTruckDeck'));
+    m.position.y = 0.41; return m;
+  });
+  reg('arch_work_gloves_shelf', 'architecture', 'Workshop Hanging Work-Gloves Storage Shelf', () => new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.82, 0.24), pbr.get('workGlovesShelf')));
+  reg('arch_wire_spool_shelf', 'architecture', 'Organized Wire & Thread Spools Shelf', () => new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.82, 0.24), pbr.get('wireSpoolRack')));
+  reg('arch_hardware_hook_board', 'architecture', 'Wooden Workshop Pulley & Shackle Tool Board', () => new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.78, 0.04), pbr.get('hardwareHookBoard')));
+  reg('arch_canvas_wall_pockets', 'architecture', 'Hanging Canvas Multi-Pocket Tool Organizer', () => new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.72, 0.04), pbr.get('canvasWallPockets')));
+  reg('arch_apt_ceiling_lamp', 'architecture', 'Warm Frosted Square Apartment Ceiling Lamp', () => new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.08, 0.42), pbr.get('frostedCeilingLamp')));
+  reg('arch_exhaust_vent_wall', 'architecture', 'Apartment Kitchen/Room Louvered Exhaust Vent', () => new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.20, 0.04), pbr.get('dustyLouveredVent')));
+  reg('arch_blueprint_poster', 'architecture', 'Framed Vintage Aerospace Blueprint Wall Poster', () => new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.42, 0.015), pbr.get('vintageBlueprintArt')));
+  reg('arch_ocean_photo_frame', 'architecture', 'Framed Coastal Ocean View Wall Picture', () => new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.46, 0.025), pbr.get('framedOceanPhoto')));
+  reg('arch_metal_filings_mat', 'architecture', 'Rubber Bench Mat Dusted with Metal Filings', ({ w = 0.65, d = 0.42 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, 0.004, d), pbr.get('metalFilingsRubber', { repeatX: 2, repeatY: 1 }));
+    m.position.y = 0.002; m.receiveShadow = true; return m;
+  });
+  reg('arch_condensation_window', 'architecture', 'Winter Condensation-Covered Glass Window', ({ w = 1.4, h = 1.1 } = {}) => {
+    const g = new THREE.Group();
+    const pane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('condensationGlass'));
+    const fm = pbr.get('brushedAluHairline');
+    const top = new THREE.Mesh(new THREE.BoxGeometry(w + 0.06, 0.04, 0.05), fm); top.position.y = h * 0.5;
+    const bot = top.clone(); bot.position.y = -h * 0.5;
+    g.add(pane, top, bot); return g;
+  });
+  reg('arch_seigaiha_curtain', 'architecture', 'Japanese Indigo Seigaiha Window Curtain', () => new THREE.Mesh(new THREE.BoxGeometry(0.75, 1.45, 0.04), pbr.get('seigaihaBlueCurtain')));
+  reg('arch_crimson_noren_cloth', 'architecture', 'Crimson Linen Noren Doorway Curtain', () => new THREE.Mesh(new THREE.BoxGeometry(0.88, 0.62, 0.02), pbr.get('crimsonNorenLinen')));
+  reg('arch_black_leather_pad', 'architecture', 'Black Pebbled Leather Protective Desk Pad', () => new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.008, 0.32), pbr.get('blackPebbledLeather')));
+  reg('arch_hinoki_shelf_plank', 'architecture', 'Pale Hinoki Cypress Display Shelf Board', () => new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.024, 0.28), pbr.get('paleHinokiCypress')));
+  reg('arch_terry_towel_folded', 'architecture', 'Fluffy White Terry-Cloth Folded Bath Towel', () => {
+    const m = new THREE.Mesh(makeRoundedBoxGeo(0.32, 0.026, 0.24, 0.010, 2), pbr.get('terryClothWhite', { repeatX: 2, repeatY: 2 }));
+    m.position.y = 0.013; m.receiveShadow = true; return m;
+  });
+  reg('arch_striped_towel_pad', 'architecture', 'Blue-Striped Fluffy Terry Bath Towel', () => {
+    const m = new THREE.Mesh(makeRoundedBoxGeo(0.32, 0.024, 0.24, 0.010, 2), pbr.get('stripedBathTowel'));
+    m.position.y = 0.012; m.receiveShadow = true; return m;
+  });
+  reg('arch_closet_storage_box', 'architecture', 'Linen-Covered Apartment Closet Storage Box', () => new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.28, 0.34), pbr.get('closetFabricBox')));
+  reg('arch_canvas_laundry_hamper', 'architecture', 'Woven Canvas Student Laundry Basket', () => new THREE.Mesh(new THREE.BoxGeometry(0.40, 0.48, 0.36), pbr.get('canvasLaundryBag')));
+  reg('nat_clear_river_surface', 'nature', 'Crystal-Clear Caustic Pebbled River Water', ({ w = 6.0, d = 14 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('clearCausticRiver', { repeatX: 3, repeatY: 7 }));
+    m.rotation.x = -Math.PI / 2; return m;
+  });
+  reg('nat_coastal_seafoam_edge', 'nature', 'Tokyo Bay Seafoam Wet Sand Shoreline', ({ w = 6.0, d = 12 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('seafoamWetSand', { repeatX: 3, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; return m;
+  });
+  reg('nat_oak_leaf_forest_bed', 'nature', 'Crisp Dry Oak Fallen Leaves Forest Bed', ({ w = 4.0, d = 8.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('dryOakFallenLeaves', { repeatX: 3, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; return m;
+  });
+
+  // =========================================================================
+  // BATCH 4 (ATLASES 46–60): 30 HIGH-VALUE SCHOOL, STATION, SHOP & LAB ASSETS
+  // =========================================================================
+  reg('arch_classroom_chalkboard', 'architecture', 'Japanese Classroom Green Chalkboard with Wood Frame', () => {
+    const g = new THREE.Group();
+    const board = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.15, 0.04), pbr.get('greenClassroomChalkboard'));
+    const tray = new THREE.Mesh(new THREE.BoxGeometry(2.44, 0.04, 0.09), pbr.get('brushedAluHairline'));
+    tray.position.set(0, -0.58, 0.03);
+    g.add(board, tray); return g;
+  });
+  reg('arch_univ_reception_counter', 'architecture', 'University / Hall Glass Reception Counter Window', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 0.55), pbr.get('univReceptionCounter'));
+    m.position.y = 0.7; return m;
+  });
+  reg('arch_univ_library_bookshelf', 'architecture', 'Full University Library Wooden Bookshelf', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2.05, 0.42), pbr.get('univLibraryBookshelf'));
+    m.position.y = 1.025; m.castShadow = true; return m;
+  });
+  reg('arch_gym_wood_court', 'architecture', 'Polished Gymnasium Hardwood Court Floor', ({ w = 12, d = 16 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('gymWoodCourtFloor', { repeatX: 4, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_warm_lit_apt_window', 'architecture', 'Warm-Lit Apartment Sliding Aluminum Window', () => new THREE.Mesh(new THREE.BoxGeometry(1.35, 1.05, 0.06), pbr.get('warmLitAptWindow')));
+  reg('arch_frosted_balcony_rail', 'architecture', 'Japanese Apartment Frosted-Glass Balcony Railing', ({ w = 2.4 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, 1.05, 0.06), pbr.get('frostedBalconyRailing', { repeatX: Math.max(1, Math.round(w / 1.2)), repeatY: 1 }));
+    m.position.y = 0.525; return m;
+  });
+  reg('arch_white_meter_box', 'architecture', 'White Steel Apartment Utility Meter-Box Door', () => new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.92, 0.06), pbr.get('whiteSteelMeterBox')));
+  reg('arch_ribbed_concrete_stair', 'architecture', 'Ribbed Concrete Outdoor Apartment Stairwell Block', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.9, 1.4), pbr.get('ribbedConcreteStair', { repeatX: 1, repeatY: 2 }));
+    m.position.y = 0.45; return m;
+  });
+  reg('arch_compact_sink_stove', 'architecture', 'Compact Stainless 3-Burner Kitchen Sink & Stove', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.85, 0.58), pbr.get('compactThreeBurnerSink'));
+    m.position.y = 0.425; return m;
+  });
+  reg('arch_japanese_unit_bath', 'architecture', 'Japanese Apartment Unit-Bath Tub & Shower Panel', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.85, 0.78), pbr.get('japaneseUnitBathTub'));
+    m.position.y = 0.925; return m;
+  });
+  reg('arch_konbini_drink_cooler', 'architecture', 'Illuminated Japanese Konbini Beverage Cooler Wall', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.85, 1.95, 0.65), pbr.get('konbiniDrinkCooler'));
+    m.position.y = 0.975; return m;
+  });
+  reg('arch_train_platform_edge', 'architecture', 'Railway Station Platform Safety Edge with Tactile Strip', ({ w = 2.4, d = 18 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('trainPlatformEdgeLine', { repeatX: 1, repeatY: 8 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_sliding_lab_cabinet', 'architecture', 'White Sliding-Glass University Lab Specimen Cabinet', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.25, 1.78, 0.46), pbr.get('slidingGlassLabCabinet'));
+    m.position.y = 0.89; m.castShadow = true; return m;
+  });
+  reg('arch_stacked_coin_washers', 'architecture', 'Stacked Commercial Coin-Laundry Washing Machines', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.95, 1.85, 0.78), pbr.get('stackedCoinWashers'));
+    m.position.y = 0.925; return m;
+  });
+  reg('arch_seigaiha_manhole', 'architecture', 'Japanese Cast-Iron Seigaiha Street Manhole Cover', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.012, 24), pbr.get('seigaihaManholeCover'));
+    m.position.y = 0.006; m.receiveShadow = true; return m;
+  });
+  reg('arch_tricolor_recycle_bins', 'architecture', 'Tri-Color Japanese Public Recycling Bin Station', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.92, 0.46), pbr.get('tricolorRecycleBins'));
+    m.position.y = 0.46; m.castShadow = true; return m;
+  });
+  reg('arch_glowing_chochin_lantern', 'architecture', 'Glowing Crimson Japanese Chochin Paper Lantern', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.34, 16), pbr.get('glowingRedChochin'));
+    return m;
+  });
+  reg('arch_koushi_sliding_door', 'architecture', 'Traditional Wooden Koushi Lattice Sliding Doors', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.65, 2.0, 0.06), pbr.get('woodenKoushiSlidingDoor'));
+    m.position.y = 1.0; return m;
+  });
+  reg('arch_wood_system_kitchen', 'architecture', 'Modern Oak System Kitchen Counter & Range Hood', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(2.1, 2.05, 0.62), pbr.get('woodSystemKitchenUnit'));
+    m.position.y = 1.025; return m;
+  });
+  reg('arch_matte_black_fridge', 'architecture', 'Sleek Matte-Black Multi-Door Refrigerator', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.72, 1.78, 0.68), pbr.get('matteBlackFridge'));
+    m.position.y = 0.89; m.castShadow = true; return m;
+  });
+  reg('arch_riveted_stainless_wall', 'architecture', 'Brushed Riveted Stainless Steel Facility Wall', ({ w = 4.0, h = 2.8 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('rivetedStainlessWall', { repeatX: 2, repeatY: 1 })));
+  reg('arch_blue_stripe_subway_wall', 'architecture', 'White Subway Tile Wall with Double Blue Stripe', ({ w = 6.0, h = 2.8 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('blueStripeSubwayTile', { repeatX: 3, repeatY: 1 })));
+  reg('arch_hex_mesh_grille', 'architecture', 'Heavy Industrial Hexagonal Steel Ventilation Grille', () => new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.72, 0.06), pbr.get('hexMeshIndustrialGrille')));
+  reg('arch_outdoor_ac_unit', 'architecture', 'Japanese Outdoor AC Condenser Unit on Concrete Blocks', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.64, 0.34), pbr.get('outdoorAcCondenserUnit'));
+    m.position.y = 0.32; m.castShadow = true; return m;
+  });
+  reg('arch_hardware_tool_pegboard', 'architecture', 'Workshop Mechanic Pegboard Packed with Hand Tools', () => new THREE.Mesh(new THREE.BoxGeometry(0.84, 0.64, 0.025), pbr.get('hardwareToolPegboard')));
+  reg('arch_shokudo_ticket_machine', 'architecture', 'Japanese Shokudo Meal Ticket Vending Machine', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.68, 1.56, 0.44), pbr.get('shokudoTicketMachine'));
+    m.position.y = 0.78; m.castShadow = true; return m;
+  });
+  reg('arch_office_binder_cabinet', 'architecture', 'Gray Steel Office Shelving Packed with Binders', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.75, 0.42), pbr.get('officeBinderSteelCabinet'));
+    m.position.y = 0.875; m.castShadow = true; return m;
+  });
+  reg('arch_warehouse_parcel_rack', 'architecture', 'Heavy-Duty Steel Logistics Warehouse Parcel Rack', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.45, 1.95, 0.56), pbr.get('warehouseCardboardRack'));
+    m.position.y = 0.975; m.castShadow = true; return m;
+  });
+  reg('arch_scifi_holo_console', 'architecture', 'Cyan Holographic Telemetry & Global Map Console', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.92, 0.08), pbr.get('scifiHoloDataConsole'));
+    return m;
+  });
+  reg('arch_industrial_cable_loom', 'architecture', 'Clamped Multi-Color Heavy Industrial Cable Loom Panel', ({ w = 1.6, h = 1.2 } = {}) => new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.08), pbr.get('bundledMulticolorCables')));
 }
