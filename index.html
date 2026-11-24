@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#040508" />
+  <title>天地綻びのクロニクル — 05:00 3D Voxel Cinema</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="cinema-canvas"></canvas>
+
+    <!-- Dynamic Cinematic Letterbox Bars -->
+    <div id="letterbox-top" class="letterbox"></div>
+    <div id="letterbox-bottom" class="letterbox"></div>
+
+    <!-- Whisper-Minimal Climax Cut-In -->
+    <div id="cutin-layer" aria-hidden="true">
+      <div id="cutin-stripe">
+        <div id="cutin-kicker"></div>
+        <div id="cutin-main"></div>
+        <div id="cutin-sub"></div>
+      </div>
+    </div>
+
+    <!-- Borderless Cinema Subtitles -->
+    <div id="subtitle-wrap">
+      <span id="subtitle-speaker"></span>
+      <span id="subtitle-text"></span>
+    </div>
+
+    <!-- Fake-Out "To Be Continued" (2:57-2:59) & Final "完" (4:57-5:00) -->
+    <div id="tbc-overlay" aria-hidden="true">
+      <div class="tbc-arrow">To Be Continued</div>
+    </div>
+
+    <div id="fin-overlay" aria-hidden="true">
+      <div class="fin-mark">完</div>
+      <button id="btn-replay" class="ghost-pill" aria-label="もう一度再生">↺</button>
+    </div>
+
+    <!-- Ultra-Minimal Opening Tap Curtain (1 Tap -> Auto-Fullscreen + Landscape + Audio!) -->
+    <div id="intro-overlay">
+      <div class="intro-inner">
+        <h1 class="intro-title">天地綻びのクロニクル</h1>
+        <div class="intro-meta">05:00 · 3D VOXEL CINEMA</div>
+        <button id="btn-start-film" class="play-orb" aria-label="再生開始">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Portrait Orientation Hint (Auto-hides in Landscape) -->
+    <div id="rotate-hint" aria-hidden="true">
+      <div class="rotate-phone"></div>
+      <div class="rotate-label">横画面推奨</div>
+      <button id="btn-force-landscape" class="rotate-btn">全画面・横向きで観る</button>
+    </div>
+
+    <!-- Ultra-Minimalist Floating Controls (Auto-vanish completely during playback!) -->
+    <div id="mini-corner" class="cinema-hud">
+      <button id="btn-play" class="icon-btn" title="再生/停止 (Space)" aria-label="再生/停止">⏸</button>
+      <button id="btn-cam-mode" class="icon-btn" title="カメラ切替 (C)" aria-label="カメラ切替">◎</button>
+      <button id="btn-mute" class="icon-btn" title="音声切替 (M)" aria-label="音声切替">🔊</button>
+      <button id="btn-record" class="icon-btn rec-btn" title="60fps WebM録画" aria-label="録画">●</button>
+      <button id="btn-fullscreen" class="icon-btn" title="全画面 (F)" aria-label="全画面">⛶</button>
+    </div>
+
+    <!-- Razor-Thin Floating Bottom Scrub Hairline -->
+    <div id="mini-scrub-wrap" class="cinema-hud">
+      <div id="scrub-meta">
+        <span id="scrub-chapter"></span>
+        <span id="timecode">00:00 / 05:00</span>
+      </div>
+      <div id="timeline-track" role="slider" aria-label="シークバー" aria-valuemin="0" aria-valuemax="300" aria-valuenow="0" tabindex="0">
+        <div id="timeline-fill"></div>
+        <div id="timeline-chapters"></div>
+        <div id="timeline-thumb"></div>
+        <div id="timeline-tooltip">00:00</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
