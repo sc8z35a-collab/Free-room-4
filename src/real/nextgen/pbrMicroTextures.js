@@ -3,7 +3,7 @@ import * as THREE from 'three';
 /**
  * Converts a grayscale height canvas into a true RGB Tangent-Space Normal Map!
  */
-function heightCanvasToNormalTex(heightCanvas, strength = 2.4, repeatX = 1, repeatY = 1) {
+export function heightCanvasToNormalTex(heightCanvas, strength = 2.4, repeatX = 1, repeatY = 1) {
   const w = heightCanvas.width;
   const h = heightCanvas.height;
   const hctx = heightCanvas.getContext('2d');
