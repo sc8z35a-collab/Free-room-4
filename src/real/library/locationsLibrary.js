@@ -16,7 +16,10 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
     const multimeter = spawn('tool_multimeter_digital'); multimeter.position.set(0.46, 0.734, -0.14); multimeter.rotation.y = -0.3;
     const solderSpool = spawn('tool_solder_spool'); solderSpool.position.set(0.54, 0.744, 0.12);
     const hexSet = spawn('tool_hex_wrench_set'); hexSet.position.set(-0.36, 0.726, -0.18);
-    g.add(desk, lamp, caliper, multimeter, solderSpool, hexSet);
+    const pegboard = spawn('arch_hardware_tool_pegboard'); pegboard.position.set(0.0, 1.25, -0.365);
+    const cork = spawn('arch_cork_pinboard_wall'); cork.position.set(-0.88, 1.26, -0.365);
+    const poster = spawn('arch_blueprint_poster'); poster.position.set(0.76, 1.26, -0.365);
+    g.add(desk, lamp, caliper, multimeter, solderSpool, hexSet, pegboard, cork, poster);
     return g;
   });
 
@@ -47,16 +50,18 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
     const extFloor = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 4.2), pbr.get('sidewalkPavers', { repeatX: 2, repeatY: 4 }));
     extFloor.rotation.x = -Math.PI / 2; extFloor.position.set(-1.3, 0.002, 0);
     const rail = spawn('arch_hallway_steel_railing', { length: 4.0 }); rail.position.set(-1.45, 0, 0);
-    g.add(wallL, wallR, wallT, frame, door, bulb, extFloor, rail);
+    const acUnit = spawn('arch_outdoor_ac_unit'); acUnit.position.set(-0.46, 0, -1.32); acUnit.rotation.y = Math.PI / 2;
+    const meterBox = spawn('arch_white_meter_box'); meterBox.position.set(-0.07, 1.32, -1.05); meterBox.rotation.y = -Math.PI / 2;
+    g.add(wallL, wallR, wallT, frame, door, bulb, extFloor, rail, acUnit, meterBox);
     return g;
   });
 
-  // 4. Room 203 Midnight Bedside
-  reg('loc_room203_midnight_bedside', 'Room 203 Midnight Futon & Frosted Window', () => {
+  // 4. Room 203 Midnight Bedside (Japanese Wired Frosted Glass Window!)
+  reg('loc_room203_midnight_bedside', 'Room 203 Midnight Futon & Wired Frosted Window', () => {
     const g = new THREE.Group();
     const futon = spawn('prop_futon_mattress'); futon.position.set(-0.32, 0.045, 0.65);
     const pillow = spawn('prop_pillow_blue'); pillow.position.set(-0.32, 0.115, 0.02);
-    const win = spawn('arch_frosted_window_bay'); win.position.set(-0.2, 0.98, -1.62);
+    const win = spawn('arch_wired_glass_window'); win.position.set(-0.2, 0.98, -1.62);
     g.add(futon, pillow, win);
     return g;
   });
@@ -87,11 +92,12 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
     const lampL = spawn('arch_streetlight_sodium'); lampL.position.set(-2.65, 0.06, -4.5);
     const lampR = spawn('arch_streetlight_sodium'); lampR.position.set(2.65, 0.06, -8.5); lampR.rotation.y = Math.PI;
     const drain = spawn('arch_storm_drain_grate'); drain.position.set(-2.05, 0.005, -0.6);
-    g.add(road, sideL, sideR, curbL, curbR, tactile, hedgeL, hedgeR, leavesL, leavesR, lampL, lampR, drain);
+    const manhole = spawn('arch_seigaiha_manhole'); manhole.position.set(0.65, 0.005, -2.4);
+    g.add(road, sideL, sideR, curbL, curbR, tactile, hedgeL, hedgeR, leavesL, leavesR, lampL, lampR, drain, manhole);
     return g;
   });
 
-  // 7. Private Railway Concrete Viaduct Underpass (Night)
+  // 7. Private Railway Concrete Viaduct Underpass (Night + Reflective Rain Puddles!)
   reg('loc_viaduct_underpass_night', 'Private Railway Concrete Viaduct Underpass Plaza', () => {
     const g = new THREE.Group();
     const ground = new THREE.Mesh(
@@ -100,6 +106,7 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
     );
     ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true;
     const gravelL = spawn('nat_gravel_shoulder', { w: 3.6, d: 18 }); gravelL.position.set(-4.2, 0.008, 0);
+    const puddles = spawn('nat_rain_puddle_patch', { w: 2.0, d: 5.5 }); puddles.position.set(-1.65, 0.011, 2.2);
     const pebblesR = spawn('nat_riverbank_pebble_bed', { w: 3.6, d: 18 }); pebblesR.position.set(4.2, 0.008, 0);
     const deck = spawn('arch_viaduct_deck_girder', { length: 22 }); deck.position.set(0, 2.38, -1.6);
     const catenary = spawn('arch_catenary_mast_wire'); catenary.position.set(-2.8, 2.64, -2.1);
@@ -107,7 +114,7 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
     const backpack = spawn('prop_backpack_hiking'); backpack.position.set(-1.35, 0, 0.05); backpack.rotation.y = 0.4;
     const cone = spawn('prop_folding_cone_safety'); cone.position.set(2.15, 0, -0.9);
     const wheelStop = spawn('arch_concrete_wheel_stop'); wheelStop.position.set(-2.1, 0.06, -1.1);
-    g.add(ground, gravelL, pebblesR, deck, catenary, bike, backpack, cone, wheelStop);
+    g.add(ground, gravelL, puddles, pebblesR, deck, catenary, bike, backpack, cone, wheelStop);
     for (const px of [-4.2, -1.4, 1.4, 4.2]) {
       const pier = spawn('arch_viaduct_pier_rust', { h: 2.38 });
       pier.position.set(px, 0, -1.8);
@@ -128,11 +135,18 @@ export function registerLocationsLibrary(registry, { pbr, spawn }) {
   // 9..24: Complete Composable Locations for Chapters 10–16 & Modular Reuse!
   reg('loc_hamamatsucho_trade_plaza', 'Hamamatsucho Industrial Trade Center Glass Plaza', () => {
     const g = new THREE.Group();
-    const plaza = spawn('arch_sidewalk_paver_bay', { w: 18, d: 18 });
+    const plaza = spawn('arch_interlocking_plaza', { w: 20, d: 20 });
+    const ginkgoL = spawn('nat_ginkgo_carpet_strip', { w: 2.6, d: 10 }); ginkgoL.position.set(-3.2, 0.01, -1.5);
+    const ginkgoR = spawn('nat_ginkgo_carpet_strip', { w: 2.6, d: 10 }); ginkgoR.position.set(3.2, 0.01, -1.5);
+    const grateL = spawn('arch_tree_grate_castiron'); grateL.position.set(-3.4, 0.012, -2.6);
+    const grateR = spawn('arch_tree_grate_castiron'); grateR.position.set(3.4, 0.012, -2.6);
+    const step = spawn('arch_granite_plaza_curb', { w: 10.0 }); step.position.set(0, 0, -4.4);
+    const colL = spawn('arch_white_facade_column', { h: 12.0 }); colL.position.set(-5.2, 0, -5.2);
+    const colR = spawn('arch_white_facade_column', { h: 12.0 }); colR.position.set(5.2, 0, -5.2);
     const glass = spawn('arch_glass_curtain_wall'); glass.position.set(0, 6.5, -7.2);
     const treeL = spawn('nat_ginkgo_tree_autumn'); treeL.position.set(-3.4, 0, -2.6);
     const treeR = spawn('nat_ginkgo_tree_autumn'); treeR.position.set(3.4, 0, -2.6);
-    g.add(plaza, glass, treeL, treeR);
+    g.add(plaza, ginkgoL, ginkgoR, grateL, grateR, step, colL, colR, glass, treeL, treeR);
     return g;
   });
 

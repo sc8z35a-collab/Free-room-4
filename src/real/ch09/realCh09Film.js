@@ -197,7 +197,7 @@ export function mountCh09Film({ initialTime = 0, startPaused = false, onReturnHu
 
   const baseMats = createRealisticMaterialSuite();
   const ngMats = createNextGenMicroMaterials();
-  const masterLib = createMasterAssetLibrary(baseMats, ngMats, [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15]);
+  const masterLib = createMasterAssetLibrary(baseMats, ngMats, [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 16, 25, 26, 39, 40, 48, 51, 56, 57]);
   let pbrReady = false;
   const screens = createCh09Screens();
   const world = createCh09World(scene, baseMats, ngMats, screens, masterLib);

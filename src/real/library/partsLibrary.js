@@ -6,7 +6,7 @@ import { makeRoundedBoxGeo } from '../hardware.js';
  * Powered by the 135-Tile Photographic PBR Atlas Bank!
  */
 export function registerPartsLibrary(registry, { baseMats, ngMats, pbr }) {
-  const aluMat = () => pbr.get('brushedStainlessDoor', { roughness: 0.24, metalness: 0.90, tint: 0xe6edf5 });
+  const aluMat = () => pbr.get('brushedAluHairline', { roughness: 0.20, metalness: 0.94, tint: 0xf2f6fa });
   const carbonMat = () => pbr.get('matteCarbonBlack', { repeatX: 2, repeatY: 2, roughness: 0.56, metalness: 0.22 });
   const darkMetal = () => pbr.get('darkSlateMetal', { roughness: 0.42, metalness: 0.72 });
   const rubberBlack = () => pbr.get('rubberDimpleBlack', { repeatX: 2, repeatY: 2, roughness: 0.78, metalness: 0.04 });
