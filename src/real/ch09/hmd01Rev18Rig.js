@@ -237,10 +237,14 @@ export function createHMD01Rev18Fighter(baseMats, ngMats) {
  * 5. White Battery-Powered Camping Lantern ("白いキャンプ用ランタン")
  * 6. Handheld Digital Stopwatch (`09.48 s`)
  */
-export function createCh09StoryProps(baseMats, ngMats, aluSplintMat) {
-  // 1. Mikan Cardboard Graveyard Box ("みかん箱")
+export function createCh09StoryProps(baseMats, ngMats, aluSplintMat, masterLib = null) {
+  const pbr = masterLib?.pbr || null;
+  const cardMat = pbr
+    ? pbr.get('wovenCanvasBurlap', { repeatX: 2, repeatY: 2, tint: 0xc29359, roughness: 0.90 })
+    : new THREE.MeshStandardMaterial({ color: 0xb68b57, roughness: 0.90 });
+
+  // 1. Mikan Cardboard Graveyard Box ("みかん箱") — populated with Master Library broken parts!
   const mikanBox = new THREE.Group();
-  const cardMat = new THREE.MeshStandardMaterial({ color: 0xb68b57, roughness: 0.90 });
   const boxBottom = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.012, 0.24), cardMat);
   boxBottom.position.y = 0.006;
   const wallF = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.14, 0.008), cardMat);
@@ -264,24 +268,24 @@ export function createCh09StoryProps(baseMats, ngMats, aluSplintMat) {
   mkLabel.position.set(0, 0.072, 0.125);
   mikanBox.add(mkLabel);
 
-  // Broken Graveyard Contents piled visibly inside the Mikan Box (April burnt PCB, May cracked PLA, Aug warped bracket, stripped servos & gears!)
-  const deadPcb = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.008, 0.055), baseMats.pcbEsp);
-  deadPcb.position.set(-0.08, 0.068, 0.02); deadPcb.rotation.set(0.35, 0.4, -0.2);
-  const brokenLeg1 = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.026, 0.028), baseMats.bambuWhite);
-  brokenLeg1.position.set(0.02, 0.076, -0.02); brokenLeg1.rotation.set(0.3, -0.5, 0.35);
-  const warpedBracket = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.036, 0.032), baseMats.printedPLA);
-  warpedBracket.position.set(-0.03, 0.082, -0.04); warpedBracket.rotation.set(0.5, 0.8, -0.4);
-  const strippedServo = new THREE.Mesh(new THREE.BoxGeometry(0.046, 0.046, 0.026), baseMats.darkAnodized);
-  strippedServo.position.set(0.08, 0.075, 0.04); strippedServo.rotation.set(-0.3, 0.5, 0.25);
-  const brokenHorn = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.006, 16), baseMats.bambuWhite);
-  brokenHorn.position.set(-0.02, 0.095, 0.05); brokenHorn.rotation.x = 0.5;
-  // Scattered gleaming broken steel gear teeth shards!
-  for (let i = 0; i < 8; i++) {
-    const tooth = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.005, 8), baseMats.chromeSteel);
-    tooth.position.set(-0.04 + (i % 4) * 0.032, 0.065 + (i % 2) * 0.014, -0.02 + Math.floor(i / 4) * 0.045);
-    mikanBox.add(tooth);
+  // Broken Graveyard Contents spawned directly from the 208-Asset Master Library!
+  if (masterLib) {
+    const deadPcb = masterLib.spawn('part_pcb_burnt_april');
+    deadPcb.position.set(-0.08, 0.072, 0.02); deadPcb.rotation.set(0.32, 0.4, -0.2);
+    const warpedPla = masterLib.spawn('part_frame_pla_warped');
+    warpedPla.position.set(0.02, 0.078, -0.02);
+    const crackedHip = masterLib.spawn('part_frame_petgcf_cracked');
+    crackedHip.position.set(-0.03, 0.084, -0.05); crackedHip.rotation.set(0.4, 0.6, -0.2);
+    const strippedServo = masterLib.spawn('part_servo_stripped');
+    strippedServo.position.set(0.08, 0.078, 0.04); strippedServo.rotation.set(-0.3, 0.5, 0.25);
+    const snappedHorn = masterLib.spawn('part_servo_horn_snapped');
+    snappedHorn.position.set(-0.01, 0.096, 0.05); snappedHorn.rotation.x = 0.4;
+    const gearShards = masterLib.spawn('part_gear_teeth_shards');
+    gearShards.position.set(0.03, 0.068, 0.02);
+    const snappedWire = masterLib.spawn('part_wire_snapped_data');
+    snappedWire.position.set(-0.06, 0.086, -0.02);
+    mikanBox.add(deadPcb, warpedPla, crackedHip, strippedServo, snappedHorn, gearShards, snappedWire);
   }
-  mikanBox.add(deadPcb, brokenLeg1, warpedBracket, strippedServo, brokenHorn);
 
   // 2. Mom's Care Package ("新米5kg・新聞紙包み赤りんご6個・なめこ汁・チラシ裏メモ")
   const carePkg = new THREE.Group();
@@ -307,25 +311,21 @@ export function createCh09StoryProps(baseMats, ngMats, aluSplintMat) {
   riceBag.castShadow = true;
   carePkg.add(riceBag);
 
-  // 6 Bright Red Apples nestled in crumpled newspaper collars!
-  const appleMat = new THREE.MeshPhysicalMaterial({ color: 0xdc2626, roughness: 0.22, clearcoat: 0.7 });
-  const newsMat = new THREE.MeshStandardMaterial({ color: 0xcbd5e1, roughness: 0.92 });
+  // 6 Bright Red Apples nestled in crumpled newspaper collars (spawned from Master Library!)
   for (let i = 0; i < 6; i++) {
-    const ax = 0.055 + (i % 3) * 0.055;
-    const az = -0.06 + Math.floor(i / 3) * 0.072;
-    const wrap = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.022, 0.028, 12), newsMat);
-    wrap.position.set(ax, 0.026, az);
-    const apple = new THREE.Mesh(new THREE.SphereGeometry(0.024, 16, 12), appleMat);
-    apple.position.set(ax, 0.048, az);
-    apple.castShadow = true;
-    carePkg.add(wrap, apple);
+    const ax = 0.055 + (i % 3) * 0.058;
+    const az = -0.06 + Math.floor(i / 3) * 0.078;
+    const appleUnit = masterLib ? masterLib.spawn('prop_red_apple_newspaper') : new THREE.Group();
+    appleUnit.scale.setScalar(0.82);
+    appleUnit.position.set(ax, 0.014, az);
+    carePkg.add(appleUnit);
   }
 
   // Instant Nameko Miso Soup Packets tucked along front edge!
-  const soupMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.45 });
   for (let s = 0; s < 3; s++) {
-    const pkt = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.012, 0.048), soupMat);
-    pkt.position.set(0.04 + s * 0.055, 0.022, 0.11);
+    const pkt = masterLib ? masterLib.spawn('prop_nameko_miso_cup') : new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.012, 0.048), new THREE.MeshStandardMaterial({ color: 0xd97706 }));
+    pkt.scale.setScalar(0.70);
+    pkt.position.set(0.04 + s * 0.055, 0.022, 0.115);
     carePkg.add(pkt);
   }
 
@@ -350,14 +350,14 @@ export function createCh09StoryProps(baseMats, ngMats, aluSplintMat) {
   momNote.rotation.set(0.08, 0.12, -0.04);
   carePkg.add(momNote);
 
-  // 3. Steaming Freshly Cooked White Rice Bowl ("炊きたての新米")
-  const riceBowl = new THREE.Group();
-  const ceramicMat = new THREE.MeshPhysicalMaterial({ color: 0x1e3a5f, roughness: 0.25, clearcoat: 0.7 });
-  const bowlBody = new THREE.Mesh(new THREE.SphereGeometry(0.062, 22, 14, 0, Math.PI * 2, Math.PI * 0.45, Math.PI * 0.55), ceramicMat);
-  bowlBody.position.y = 0.060;
-  const riceMound = new THREE.Mesh(new THREE.SphereGeometry(0.056, 20, 12), new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.75 }));
-  riceMound.scale.set(1, 0.45, 1);
-  riceMound.position.y = 0.062;
+  // 3. Steaming Freshly Cooked White Rice Bowl + Chopsticks ("炊きたての新米")
+  const riceBowl = masterLib ? masterLib.spawn('prop_steaming_rice_bowl') : new THREE.Group();
+  if (masterLib) {
+    const chopsticks = masterLib.spawn('prop_chopsticks_pair');
+    chopsticks.position.set(0.01, 0.008, 0.088);
+    chopsticks.rotation.y = 0.16;
+    riceBowl.add(chopsticks);
+  }
   const steamPuffs = [];
   const steamMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.34, depthWrite: false });
   for (let i = 0; i < 4; i++) {
@@ -366,74 +366,56 @@ export function createCh09StoryProps(baseMats, ngMats, aluSplintMat) {
     riceBowl.add(sf);
     steamPuffs.push(sf);
   }
-  riceBowl.add(bowlBody, riceMound);
 
-  // 4. 4-Day Hand-Metalworking Station ("四つ折りバスタオル・卓上万力・1.5mmアルミ板・鉄工ヤスリ・鋼歯車")
+  // 4. 4-Day Hand-Metalworking Station (Photographic Woven Bath Towel + Blue Desktop Vise + 1.5mm Alu Sheet + Reciprocating Steel File + Greased Steel Gears + Tools!)
   const metalworkGroup = new THREE.Group();
-  const towelMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.96 });
-  const bathTowel = new THREE.Mesh(makeRoundedBoxGeo(0.28, 0.022, 0.20, 0.006, 2), towelMat);
-  bathTowel.position.set(-0.04, 0.011, 0);
-  bathTowel.receiveShadow = true;
+  const bathTowel = masterLib
+    ? masterLib.spawn('tool_bath_towel_folded')
+    : new THREE.Mesh(makeRoundedBoxGeo(0.28, 0.022, 0.20, 0.006, 2), new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.96 }));
+  bathTowel.position.set(-0.04, 0.012, 0);
   metalworkGroup.add(bathTowel);
 
-  // Blue Cast-Iron Desktop Vise sitting atop the bath towel!
-  const viseMat = new THREE.MeshPhysicalMaterial({ color: 0x1d4ed8, roughness: 0.45, metalness: 0.45 });
-  const viseBase = new THREE.Mesh(new THREE.BoxGeometry(0.085, 0.042, 0.065), viseMat);
-  viseBase.position.set(-0.04, 0.042, 0);
-  viseBase.castShadow = true;
-  const viseJaw = new THREE.Mesh(new THREE.BoxGeometry(0.085, 0.026, 0.018), baseMats.chromeSteel);
-  viseJaw.position.set(-0.04, 0.066, 0.016);
-  const viseHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.095, 12), baseMats.chromeSteel);
-  viseHandle.rotation.z = Math.PI / 2;
-  viseHandle.position.set(-0.04, 0.044, 0.046);
-  metalworkGroup.add(viseBase, viseJaw, viseHandle);
+  // Blue Cast-Iron Desktop Vise sitting atop the photographic bath towel!
+  const viseUnit = masterLib ? masterLib.spawn('tool_bench_vise_blue') : new THREE.Group();
+  viseUnit.position.set(-0.04, 0.022, 0);
+  metalworkGroup.add(viseUnit);
 
   // Gleaming 1.5mm Silver Aluminum Sheet clamped in the vise & bending cleanly to 90°!
-  const aluVertical = new THREE.Mesh(new THREE.BoxGeometry(0.064, 0.024, 0.0022), aluSplintMat);
-  aluVertical.position.set(-0.04, 0.074, 0.004);
+  const aluVertical = new THREE.Mesh(new THREE.BoxGeometry(0.068, 0.026, 0.0022), aluSplintMat);
+  aluVertical.position.set(-0.04, 0.105, 0.0);
   const aluBentFlange = new THREE.Group();
-  aluBentFlange.position.set(-0.04, 0.084, 0.004);
-  const flangeMesh = new THREE.Mesh(new THREE.BoxGeometry(0.064, 0.032, 0.0022), aluSplintMat);
-  flangeMesh.position.set(0, 0.016, 0);
+  aluBentFlange.position.set(-0.04, 0.116, 0.0);
+  const flangeMesh = new THREE.Mesh(new THREE.BoxGeometry(0.068, 0.034, 0.0022), aluSplintMat);
+  flangeMesh.position.set(0, 0.017, 0);
   aluBentFlange.add(flangeMesh);
   metalworkGroup.add(aluVertical, aluBentFlange);
 
   // Steel Hand File reciprocating across the gleaming aluminum edge ("シュッ、シュッ")!
-  const steelFile = new THREE.Group();
-  const fileBlade = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.005, 0.014), baseMats.darkAnodized);
-  const fileHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.007, 0.075, 14), new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.65 }));
-  fileHandle.rotation.z = Math.PI / 2;
-  fileHandle.position.x = 0.105;
-  steelFile.add(fileBlade, fileHandle);
-  steelFile.position.set(-0.02, 0.098, 0.008);
+  const steelFile = masterLib ? masterLib.spawn('tool_steel_file_bastard') : new THREE.Group();
+  steelFile.position.set(-0.02, 0.132, 0.008);
   metalworkGroup.add(steelFile);
 
-  // Open Servo Gearbox beside the vise with gleaming New Steel Replacement Gears!
+  // Open Servo Gearbox beside the vise with gleaming New Steel Replacement Gears + Grease & Hex Wrench!
   const gearbox = new THREE.Group();
-  gearbox.position.set(0.14, 0.015, 0.02);
-  const gbCase = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.024, 0.045), baseMats.darkAnodized);
+  gearbox.position.set(0.18, 0.015, 0.02);
+  const gbCase = new THREE.Mesh(new THREE.BoxGeometry(0.068, 0.026, 0.048), pbr ? pbr.get('darkSlateMetal') : baseMats.darkAnodized);
   gearbox.add(gbCase);
-  for (let g = 0; g < 3; g++) {
-    const gear = new THREE.Mesh(new THREE.CylinderGeometry(0.010 + g * 0.002, 0.010 + g * 0.002, 0.007, 14), baseMats.chromeSteel);
-    gear.position.set(-0.018 + g * 0.018, 0.016, (g % 2) * 0.008 - 0.004);
-    gearbox.add(gear);
+  if (masterLib) {
+    const g1 = masterLib.spawn('part_gear_steel_spur'); g1.position.set(-0.018, 0.016, -0.004);
+    const g2 = masterLib.spawn('part_gear_steel_spur'); g2.position.set(0.002, 0.016, 0.006);
+    const g3 = masterLib.spawn('part_gear_steel_spur'); g3.position.set(0.020, 0.016, -0.004);
+    const grease = masterLib.spawn('tool_grease_tube'); grease.position.set(0.17, 0.012, -0.10); grease.rotation.set(Math.PI / 2, 0, 0.42);
+    const hexKey = masterLib.spawn('tool_hex_wrench_25mm'); hexKey.position.set(-0.18, 0.004, 0.13); hexKey.rotation.y = -0.35;
+    gearbox.add(g1, g2, g3);
+    metalworkGroup.add(grease, hexKey);
   }
   metalworkGroup.add(gearbox);
 
   // 5. White Battery-Powered Camping Lantern ("白いキャンプ用ランタン")
-  const lantern = new THREE.Group();
-  const lanBase = new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.056, 0.045, 22), baseMats.darkAnodized);
-  lanBase.position.y = 0.0225;
-  const lanGlow = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.045, 0.045, 0.115, 22),
-    new THREE.MeshBasicMaterial({ color: 0xf8fafc })
-  );
-  lanGlow.position.y = 0.102;
-  const lanCap = new THREE.Mesh(new THREE.CylinderGeometry(0.054, 0.052, 0.024, 22), baseMats.darkAnodized);
-  lanCap.position.y = 0.170;
-  const lanLight = new THREE.PointLight(0xe0f2fe, 4.2, 4.8, 1.35);
-  lanLight.position.set(0, 0.14, 0);
-  lantern.add(lanBase, lanGlow, lanCap, lanLight);
+  const lantern = masterLib ? masterLib.spawn('prop_camping_lantern_white') : new THREE.Group();
+  const lanLight = new THREE.PointLight(0xe0f2fe, 4.4, 4.8, 1.35);
+  lanLight.position.set(0, 0.16, 0);
+  lantern.add(lanLight);
 
   // 6. Digital Stopwatch Prop / Overlay Board (`09.48 s`)
   const swC = document.createElement('canvas');

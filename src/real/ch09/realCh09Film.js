@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { createRealisticMaterialSuite } from '../materials.js';
 import { NextGenCinemaMacroPipeline } from '../nextgen/cinemaMacroPipeline.js';
 import { createNextGenStudioIBL, createNextGenMicroMaterials } from '../nextgen/pbrMicroTextures.js';
+import { createMasterAssetLibrary } from '../library/masterLibrary.js';
 import { createCh09Screens, createCh09World } from './setsAndScreens09.js';
 import { Ch09AudioEngine } from './audio09.js';
 import {
@@ -196,9 +197,19 @@ export function mountCh09Film({ initialTime = 0, startPaused = false, onReturnHu
 
   const baseMats = createRealisticMaterialSuite();
   const ngMats = createNextGenMicroMaterials();
+  const masterLib = createMasterAssetLibrary(baseMats, ngMats, [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15]);
+  let pbrReady = false;
   const screens = createCh09Screens();
-  const world = createCh09World(scene, baseMats, ngMats, screens);
+  const world = createCh09World(scene, baseMats, ngMats, screens, masterLib);
   const audio = new Ch09AudioEngine();
+
+  masterLib.ready.then(() => {
+    pbrReady = true;
+    if (!disposed) {
+      renderer.shadowMap.needsUpdate = true;
+      needsRender = true;
+    }
+  });
 
   const initialScale = isMobile ? 0.88 : 1.0;
   const pipeline = new NextGenCinemaMacroPipeline(
@@ -345,6 +356,8 @@ export function mountCh09Film({ initialTime = 0, startPaused = false, onReturnHu
 
   window.__CINEMA__ = {
     film: 'ch09',
+    isPbrReady: () => pbrReady,
+    libraryStats: masterLib.getStats(),
     seek: (sec, showHud = false, syncGpu = false) => {
       document.body.classList.toggle('ui-idle', !showHud);
       isPlaying = false;
@@ -362,6 +375,7 @@ export function mountCh09Film({ initialTime = 0, startPaused = false, onReturnHu
       totalDrawCalls: pipeline.lastTotalCalls || 0,
       triangles: pipeline.lastSceneTriangles || 0,
       scale: drs.currentScale,
+      library: masterLib.getStats(),
     }),
   };
 
@@ -376,6 +390,7 @@ export function mountCh09Film({ initialTime = 0, startPaused = false, onReturnHu
     audio.dispose();
     controls.dispose();
     shell.dispose();
+    masterLib.dispose();
     envRT.dispose();
     pipeline.dispose();
     renderer.dispose();

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-function makeRoundedBoxGeo(w, h, d, bevel = 0.003, steps = 2) {
+export function makeRoundedBoxGeo(w, h, d, bevel = 0.003, steps = 2) {
   const shape = new THREE.Shape();
   const hw = Math.max(0.001, w * 0.5 - bevel);
   const hh = Math.max(0.001, h * 0.5 - bevel);

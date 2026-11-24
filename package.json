@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp dist/dev.html dist/index.html && cp dist/dev.html index.html && rm -rf assets && cp -r dist/assets assets",
+    "build": "vite build && cp dist/dev.html dist/index.html && cp dist/dev.html index.html && rm -rf assets && cp -r dist/assets assets && rm -rf textures && cp -r dist/textures textures",
     "preview": "vite preview"
   },
   "repository": {
