@@ -4,6 +4,7 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh07 = document.getElementById('btn-launch-ch07');
 const btnLaunchCh06 = document.getElementById('btn-launch-ch06');
 const btnLaunchCh05 = document.getElementById('btn-launch-ch05');
 const btnLaunchCh04 = document.getElementById('btn-launch-ch04');
@@ -31,6 +32,7 @@ function returnToMainMenuHub() {
 }
 
 const LOADER_LABELS = {
+  ch07: '次世代マクロ3D『第7章：すり足の一歩と、75℃の熱壁（02:30）』を構築中…',
   ch06: '次世代マクロ3D『第6章：夏休みの全身組立と、起立不能の重力（02:30）』を構築中…',
   ch05: '次世代マクロ3D『第5章：深圳から届いた緑の基板（02:30）』を構築中…',
   ch04: '極限リアル3D『第4章：線形代数の復習と、逆運動学の暴走（02:30）』を構築中…',
@@ -59,14 +61,21 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch06;
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch07;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch06') {
+    if (kind === 'ch07') {
+      const { mountCh07Film } = await import('./real/ch07/realCh07Film.js');
+      activeSession = mountCh07Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch06') {
       const { mountCh06Film } = await import('./real/ch06/realCh06Film.js');
       activeSession = mountCh06Film({
         initialTime,
@@ -111,6 +120,10 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   }
 }
 
+btnLaunchCh07?.addEventListener('click', () => {
+  launchFilm('ch07', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+
 btnLaunchCh06?.addEventListener('click', () => {
   launchFilm('ch06', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
@@ -131,7 +144,7 @@ btnLaunchVoxel?.addEventListener('click', () => {
   launchFilm('voxel', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
 
-// Deep-link query params (?film=ch06|ch05|ch04|hmd|voxel&t=...&paused=1)
+// Deep-link query params (?film=ch07|ch06|ch05|ch04|hmd|voxel&t=...&paused=1)
 const params = new URLSearchParams(window.location.search);
 const queryFilm = params.get('film');
 if (queryFilm && queryFilm in LOADER_LABELS) {
