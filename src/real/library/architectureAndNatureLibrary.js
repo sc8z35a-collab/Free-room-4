@@ -698,4 +698,73 @@ export function registerArchitectureAndNatureLibrary(registry, { baseMats, ngMat
     return m;
   });
   reg('arch_industrial_cable_loom', 'architecture', 'Clamped Multi-Color Heavy Industrial Cable Loom Panel', ({ w = 1.6, h = 1.2 } = {}) => new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.08), pbr.get('bundledMulticolorCables')));
+
+  // =========================================================================
+  // BATCH 5 (ATLASES 61–73): 20 SUBWAY, TRAIN, TUNNEL, FOOD & RUIN ASSETS
+  // =========================================================================
+  reg('arch_subway_ballast_track', 'architecture', 'Tokyo Subway Steel Rail & Ballast Track Bed', ({ w = 3.2, d = 18 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('subwayBallastTracks', { repeatX: 1, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_subway_station_wall', 'architecture', 'Tokyo Subway Weathered Tile Wall & 3-Seat Bench', ({ w = 6.0, h = 2.8 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('subwayStationBenchWall', { repeatX: 2, repeatY: 1 })));
+  reg('arch_subway_exit_corridor', 'architecture', 'Subway Concrete Exit Arrow Wall & Maintenance Door', ({ w = 4.5, h = 2.8 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('subwayExitArrowCorridor', { repeatX: 2, repeatY: 1 })));
+  reg('arch_subway_platform_slab', 'architecture', 'Subway Tactile Platform Edge & Concrete Deck', ({ w = 3.2, d = 16 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('subwayPlatformTactile', { repeatX: 1, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_subway_train_car_shell', 'architecture', 'Photorealistic Tokyo Subway Commuter Train Car', () => {
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.BoxGeometry(2.8, 3.0, 12.0), pbr.get('subwayCarSideWindows', { repeatX: 3, repeatY: 1 }));
+    body.position.y = 1.95;
+    const front = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 3.0), pbr.get('subwayCarFrontCabFace'));
+    front.position.set(0, 1.95, 6.01);
+    const roof = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 12.0), pbr.get('subwayCarRoofVentPanel', { repeatX: 1, repeatY: 3 }));
+    roof.rotation.x = -Math.PI / 2; roof.position.y = 3.46;
+    g.add(body, front, roof); return g;
+  });
+  reg('arch_subway_interior_bay', 'architecture', 'Tokyo Subway Interior Moquette Seat & Window Bay', () => {
+    const g = new THREE.Group();
+    const wall = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.2), pbr.get('subwayCarMoquetteSeat'));
+    wall.position.set(0, 1.1, -1.25);
+    const fl = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.5), pbr.get('subwayCarAisleFloor'));
+    fl.rotation.x = -Math.PI / 2;
+    const ceil = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.5), pbr.get('subwayCarInteriorCeiling'));
+    ceil.rotation.x = Math.PI / 2; ceil.position.y = 2.2;
+    g.add(wall, fl, ceil); return g;
+  });
+  reg('arch_shield_tunnel_ring', 'architecture', 'Curved Precast Concrete Shield Tunnel Lining', ({ w = 6.0, h = 4.0 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('shieldTunnelConcreteRing', { repeatX: 2, repeatY: 1 })));
+  reg('arch_highway_guardrail', 'architecture', 'Galvanized Bolted Steel Highway Guardrail Beam', ({ length = 6.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.36, length), pbr.get('boltedHighwayGuardrail', { repeatX: 3, repeatY: 1 }));
+    m.position.y = 0.62; m.castShadow = true; return m;
+  });
+  reg('arch_galvanized_utility_pole', 'architecture', 'Galvanized Steel Street Utility Pole', ({ h = 6.5 } = {}) => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, h, 14), pbr.get('galvanizedSteelPole', { repeatX: 1, repeatY: 4 }));
+    m.position.y = h * 0.5; m.castShadow = true; return m;
+  });
+  reg('arch_pvc_strip_curtain', 'architecture', 'Industrial Clear PVC Warehouse Strip Curtain', () => new THREE.Mesh(new THREE.BoxGeometry(1.8, 2.1, 0.03), pbr.get('clearPvcStripCurtain')));
+  reg('arch_indigo_asanoha_noren', 'architecture', 'Traditional Indigo Asanoha Pattern Noren Curtain', () => new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.72, 0.02), pbr.get('indigoAsanohaNoren')));
+  reg('arch_kraft_rice_sack', 'architecture', 'Photorealistic Twine-Tied Kraft Paper 5kg Rice Sack', () => {
+    const m = new THREE.Mesh(makeRoundedBoxGeo(0.28, 0.36, 0.14, 0.028, 2), pbr.get('kraftRiceSackTwine'));
+    m.position.y = 0.18; m.castShadow = true; return m;
+  });
+  reg('arch_shrine_kawara_roof', 'architecture', 'Lichen-Speckled Japanese Kawara Ceramic Tile Roof', ({ w = 4.0, d = 2.6 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('lichenKawaraRoofTiles', { repeatX: 3, repeatY: 2 }));
+    m.rotation.x = -Math.PI * 0.38; return m;
+  });
+  reg('arch_vermilion_shrine_wall', 'architecture', 'Weathered Peeling Vermilion Shrine Timber Wall', ({ w = 3.2, h = 2.6 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('peelingVermilionShrine', { repeatX: 2, repeatY: 1 })));
+  reg('arch_gothic_stone_arch', 'architecture', 'Romanesque Carved Limestone Archway Panel', () => new THREE.Mesh(new THREE.BoxGeometry(2.6, 2.8, 0.24), pbr.get('romanStoneArchVault')));
+  reg('arch_dented_yellow_drum', 'architecture', 'Weathered Dented Yellow Steel Industrial Oil Drum', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.29, 0.29, 0.88, 20), pbr.get('dentedYellowOilDrum'));
+    m.position.y = 0.44; m.castShadow = true; return m;
+  });
+  reg('arch_mine_wood_crate', 'architecture', 'Weathered Heavy Wooden Industrial Shipping Crate', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.76, 0.76), pbr.get('weatheredMineWoodCrate'));
+    m.position.y = 0.38; m.castShadow = true; return m;
+  });
+  reg('arch_board_formed_bunker', 'architecture', 'Board-Formed Raw Concrete Underground Bunker Wall', ({ w = 5.0, h = 3.0 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('boardFormedBunkerWall', { repeatX: 2, repeatY: 1 })));
+  reg('nat_autumn_momiji_bed', 'nature', 'Red Japanese Momiji Maple Leaves Forest Floor', ({ w = 4.0, d = 8.0 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('autumnMomijiSoilBed', { repeatX: 3, repeatY: 6 }));
+    m.rotation.x = -Math.PI / 2; return m;
+  });
+  reg('nat_quarry_granite_cliff', 'nature', 'Japanese Quarry Chiseled Granite Cliff Wall', ({ w = 6.0, h = 4.0 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('chiseledVerticalQuarry', { repeatX: 3, repeatY: 2 })));
 }

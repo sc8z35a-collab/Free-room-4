@@ -214,7 +214,7 @@ export function registerToolsAndPropsLibrary(registry, { baseMats, ngMats, pbr }
     const g = new THREE.Group();
     const bowl = new THREE.Mesh(new THREE.SphereGeometry(0.068, 20, 14, 0, Math.PI * 2, Math.PI * 0.45, Math.PI * 0.55), new THREE.MeshPhysicalMaterial({ color: 0x1e3a5f, roughness: 0.26, clearcoat: 0.6 }));
     bowl.position.y = 0.068;
-    const mound = new THREE.Mesh(new THREE.SphereGeometry(0.060, 18, 12), pbr.get('ceramicGlazeCream', { roughness: 0.72 }));
+    const mound = new THREE.Mesh(new THREE.SphereGeometry(0.060, 18, 12), pbr.get('steamingWhiteRiceMacro', { repeatX: 2, repeatY: 2 }));
     mound.scale.set(1, 0.46, 1); mound.position.y = 0.062;
     g.add(bowl, mound);
     return g;
