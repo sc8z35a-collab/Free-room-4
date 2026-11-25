@@ -767,4 +767,61 @@ export function registerArchitectureAndNatureLibrary(registry, { baseMats, ngMat
     m.rotation.x = -Math.PI / 2; return m;
   });
   reg('nat_quarry_granite_cliff', 'nature', 'Japanese Quarry Chiseled Granite Cliff Wall', ({ w = 6.0, h = 4.0 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('chiseledVerticalQuarry', { repeatX: 3, repeatY: 2 })));
+
+  // =========================================================================
+  // BATCH 6 (ATLASES 74–88): 20 URBAN, APARTMENT, LAB & HERITAGE ASSETS (TOTAL = 340!)
+  // =========================================================================
+  reg('arch_wood_dish_cupboard', 'architecture', 'Japanese Wooden Glass-Door Dish Cupboard', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.92, 1.48, 0.38), pbr.get('woodGlassDishCupboard'));
+    m.position.y = 0.74; m.castShadow = true; return m;
+  });
+  reg('arch_laundry_drying_rack', 'architecture', 'Indoor Apartment Hanging Laundry Drying Rack', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.38, 0.42), pbr.get('indoorLaundryDryingRack'));
+    m.position.y = 0.69; return m;
+  });
+  reg('arch_window_blinds_white', 'architecture', 'White Horizontal Aluminum Window Venetian Blinds', ({ w = 1.4, h = 1.2 } = {}) => new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.03), pbr.get('whiteWindowBlinds')));
+  reg('arch_houseplant_shelf', 'architecture', 'Two-Tier Wooden Wall Shelf with Potted Plants', () => new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.92, 0.24), pbr.get('pottedHouseplantShelves')));
+  reg('arch_pc_workstation_top', 'architecture', 'Top-Down PC Monitor, Keyboard & Notebook Desk Surface', () => new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.02, 0.62), pbr.get('topDownPcMonitorDesk')));
+  reg('arch_green_exit_door', 'architecture', 'Japanese Green Steel Emergency Exit Door & Sign', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.05, 2.15, 0.08), pbr.get('greenEmergencyExitDoor'));
+    m.position.y = 1.075; return m;
+  });
+  reg('arch_stainless_elevators', 'architecture', 'Twin Brushed Stainless Hall Elevator Doors', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.4, 0.12), pbr.get('twinStainlessElevators'));
+    m.position.y = 1.2; return m;
+  });
+  reg('arch_metro_route_sign', 'architecture', 'Illuminated Tokyo Metro Colored Transit Route Map', () => new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.92, 0.05), pbr.get('metroTransitRouteMap')));
+  reg('arch_fire_alarm_box', 'architecture', 'Red Japanese Corridor Fire Alarm Call Point', () => new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.18, 0.04), pbr.get('redFireAlarmCallPoint')));
+  reg('arch_red_postbox_jp', 'architecture', 'Classic Red Cylindrical Japanese Street Postbox', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.20, 0.20, 1.25, 16), pbr.get('classicRedJapanesePost'));
+    m.position.y = 0.625; m.castShadow = true; return m;
+  });
+  reg('arch_park_water_fountain', 'architecture', 'Stainless Steel Campus / Park Drinking Fountain', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.14, 0.88, 16), pbr.get('stainlessParkFountain'));
+    m.position.y = 0.44; m.castShadow = true; return m;
+  });
+  reg('arch_community_corkboard', 'architecture', 'Campus Festival Flyers & Pinned Community Corkboard', () => new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.85, 0.04), pbr.get('communityPinnedCorkboard')));
+  reg('arch_blue_stripe_awning', 'architecture', 'Blue-and-White Scalloped Festival Booth Awning', ({ w = 2.6 } = {}) => new THREE.Mesh(new THREE.BoxGeometry(w, 0.68, 0.04), pbr.get('blueWhiteStripeAwning', { repeatX: 2, repeatY: 1 })));
+  reg('arch_street_newsstand', 'architecture', 'Green Metal Street Newspaper & Magazine Stand', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.38, 0.48), pbr.get('greenStreetNewsstand'));
+    m.position.y = 0.69; m.castShadow = true; return m;
+  });
+  reg('arch_parcel_pickup_locker', 'architecture', 'Smart Automated Parcel Delivery Pickup Locker Bank', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.65, 1.85, 0.52), pbr.get('smartParcelPickupLocker'));
+    m.position.y = 0.925; m.castShadow = true; return m;
+  });
+  reg('arch_umbrella_rack', 'architecture', 'Wire-Mesh Entrance Umbrella Stand with Umbrellas', () => {
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.58, 14), pbr.get('meshUmbrellaStandRack'));
+    m.position.y = 0.29; return m;
+  });
+  reg('arch_cleanroom_hatch', 'architecture', 'White Aerospace Cleanroom Pressure Hatch Panel', () => new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 0.08), pbr.get('whiteCleanroomHatch')));
+  reg('arch_o2_cylinder_rack', 'architecture', 'Pressurized Laboratory Gas / O2 Cylinder Rack', () => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(1.25, 1.65, 0.48), pbr.get('pressurizedO2TankRack'));
+    m.position.y = 0.825; return m;
+  });
+  reg('arch_herringbone_brick_plaza', 'architecture', 'Classic Red Herringbone Brick Campus Plaza Floor', ({ w = 8, d = 14 } = {}) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pbr.get('herringboneRedBrickPaver', { repeatX: 4, repeatY: 7 }));
+    m.rotation.x = -Math.PI / 2; m.receiveShadow = true; return m;
+  });
+  reg('arch_drystone_retaining_wall', 'architecture', 'Natural Japanese Fitted Granite Retaining Wall', ({ w = 6, h = 2.4 } = {}) => new THREE.Mesh(new THREE.PlaneGeometry(w, h), pbr.get('fittedGraniteFieldstone', { repeatX: 3, repeatY: 1 })));
 }
