@@ -4,6 +4,7 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh12 = document.getElementById('btn-launch-ch12');
 const btnLaunchCh11 = document.getElementById('btn-launch-ch11');
 const btnLaunchCh10 = document.getElementById('btn-launch-ch10');
 const btnLaunchCh09 = document.getElementById('btn-launch-ch09');
@@ -36,6 +37,7 @@ function returnToMainMenuHub() {
 }
 
 const LOADER_LABELS = {
+  ch12: '次世代340種資産＆792実写PBR『第12章：聖夜の閃光と、柔らかい鉄（02:30）』を構築中…',
   ch11: '次世代340種資産＆792実写PBR『第11章（第二部開幕）：白紙への回帰と、冬の設計図（02:30）』を構築中…',
   ch10: '次世代340種資産＆792実写PBR『第10章（第一部・完）：小さな完走と限界（02:30）』を構築中…',
   ch09: '次世代マクロ3D『第9章：破壊と修復のループ、銀色の添え木（02:30）』を構築中…',
@@ -69,14 +71,21 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch11;
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch12;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch11') {
+    if (kind === 'ch12') {
+      const { mountCh12Film } = await import('./real/ch12/realCh12Film.js');
+      activeSession = mountCh12Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch11') {
       const { mountCh11Film } = await import('./real/ch11/realCh11Film.js');
       activeSession = mountCh11Film({
         initialTime,
@@ -155,6 +164,10 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
     launching = false;
   }
 }
+
+btnLaunchCh12?.addEventListener('click', () => {
+  launchFilm('ch12', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
 
 btnLaunchCh11?.addEventListener('click', () => {
   launchFilm('ch11', { initialTime: 0, startPaused: false, fromUserGesture: true });
