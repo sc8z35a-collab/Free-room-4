@@ -4,6 +4,10 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh20 = document.getElementById('btn-launch-ch20');
+const btnLaunchCh19 = document.getElementById('btn-launch-ch19');
+const btnLaunchCh18 = document.getElementById('btn-launch-ch18');
+const btnLaunchCh17 = document.getElementById('btn-launch-ch17');
 const btnLaunchCh16 = document.getElementById('btn-launch-ch16');
 const btnLaunchCh15 = document.getElementById('btn-launch-ch15');
 const btnLaunchCh14 = document.getElementById('btn-launch-ch14');
@@ -41,6 +45,10 @@ function returnToMainMenuHub() {
 }
 
 const LOADER_LABELS = {
+  ch20: '次世代340種資産＆792実写PBR【最終章・第20章：五百二十日目の朝、アスファルトを踏みしめて（02:30）】を構築中…',
+  ch19: '次世代340種資産＆792実写PBR『第19章：外乱への反射 ——「生き物」になった瞬間（02:30）』を構築中…',
+  ch18: '次世代340種資産＆792実写PBR『第18章：逆流する稲妻と、二度目の夏休み（02:30）』を構築中…',
+  ch17: '次世代340種資産＆792実写PBR『第17章：身体の声を聴く夏 —— 7.62キロの初起立（02:30）』を構築中…',
   ch16: '次世代340種資産＆792実写PBR『第16章：夢と現実の断崖 —— Sim-to-Realの洗礼（02:30）』を構築中…',
   ch15: '次世代340種資産＆792実写PBR『第15章：仮想空間の四千人の分身（02:30）』を構築中…',
   ch14: '次世代340種資産＆792実写PBR『第14章：黒い金属と炭素の骨格（02:30）』を構築中…',
@@ -79,118 +87,70 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch16;
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch20;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch16') {
+    if (kind === 'ch20') {
+      const { mountCh20Film } = await import('./real/ch20/realCh20Film.js');
+      activeSession = mountCh20Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
+    } else if (kind === 'ch19') {
+      const { mountCh19Film } = await import('./real/ch19/realCh19Film.js');
+      activeSession = mountCh19Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
+    } else if (kind === 'ch18') {
+      const { mountCh18Film } = await import('./real/ch18/realCh18Film.js');
+      activeSession = mountCh18Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
+    } else if (kind === 'ch17') {
+      const { mountCh17Film } = await import('./real/ch17/realCh17Film.js');
+      activeSession = mountCh17Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
+    } else if (kind === 'ch16') {
       const { mountCh16Film } = await import('./real/ch16/realCh16Film.js');
-      activeSession = mountCh16Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh16Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch15') {
       const { mountCh15Film } = await import('./real/ch15/realCh15Film.js');
-      activeSession = mountCh15Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh15Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch14') {
       const { mountCh14Film } = await import('./real/ch14/realCh14Film.js');
-      activeSession = mountCh14Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh14Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch13') {
       const { mountCh13Film } = await import('./real/ch13/realCh13Film.js');
-      activeSession = mountCh13Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh13Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch12') {
       const { mountCh12Film } = await import('./real/ch12/realCh12Film.js');
-      activeSession = mountCh12Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh12Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch11') {
       const { mountCh11Film } = await import('./real/ch11/realCh11Film.js');
-      activeSession = mountCh11Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh11Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch10') {
       const { mountCh10Film } = await import('./real/ch10/realCh10Film.js');
-      activeSession = mountCh10Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh10Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch09') {
       const { mountCh09Film } = await import('./real/ch09/realCh09Film.js');
-      activeSession = mountCh09Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh09Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch08') {
       const { mountCh08Film } = await import('./real/ch08/realCh08Film.js');
-      activeSession = mountCh08Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh08Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch07') {
       const { mountCh07Film } = await import('./real/ch07/realCh07Film.js');
-      activeSession = mountCh07Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh07Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch06') {
       const { mountCh06Film } = await import('./real/ch06/realCh06Film.js');
-      activeSession = mountCh06Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh06Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch05') {
       const { mountCh05Film } = await import('./real/ch05/realCh05Film.js');
-      activeSession = mountCh05Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh05Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'ch04') {
       const { mountCh04Film } = await import('./real/ch04/realCh04Film.js');
-      activeSession = mountCh04Film({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountCh04Film({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else if (kind === 'hmd') {
       const { mountRealFilm } = await import('./real/realFilm.js');
-      activeSession = mountRealFilm({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountRealFilm({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     } else {
       const { mountVoxelFilm } = await import('./voxelFilm.js');
-      activeSession = mountVoxelFilm({
-        initialTime,
-        startPaused,
-        onReturnHub: returnToMainMenuHub,
-      });
+      activeSession = mountVoxelFilm({ initialTime, startPaused, onReturnHub: returnToMainMenuHub });
     }
   } catch (err) {
     console.error('Failed to mount 3D film:', err);
@@ -200,6 +160,19 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
     launching = false;
   }
 }
+
+btnLaunchCh20?.addEventListener('click', () => {
+  launchFilm('ch20', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+btnLaunchCh19?.addEventListener('click', () => {
+  launchFilm('ch19', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+btnLaunchCh18?.addEventListener('click', () => {
+  launchFilm('ch18', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+btnLaunchCh17?.addEventListener('click', () => {
+  launchFilm('ch17', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
 
 btnLaunchCh16?.addEventListener('click', () => {
   launchFilm('ch16', { initialTime: 0, startPaused: false, fromUserGesture: true });
