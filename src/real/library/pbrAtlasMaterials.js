@@ -808,6 +808,171 @@ export const PBR_TILE_CATALOG = {
   flakingCharcoalPlaster:  { atlas: 73, r: 2, c: 0, rough: 0.88, metal: 0.04, nStr: 2.5, fallback: 0x626466 },
   ribbedBunkerTieConcrete: { atlas: 73, r: 2, c: 1, rough: 0.84, metal: 0.08, nStr: 2.5, fallback: 0x96928c },
   crackedVintageSquareTile:{ atlas: 73, r: 2, c: 2, rough: 0.54, metal: 0.04, nStr: 2.4, fallback: 0xc8c0b2 },
+
+  // === ATLAS 74: Underground Vault & Beam Ceilings (Variant B) ===
+  fracturedGraniteVault:   { atlas: 74, r: 0, c: 0, rough: 0.90, metal: 0.04, nStr: 2.9, fallback: 0x625e58 },
+  rafterWoodRoofDeck:      { atlas: 74, r: 0, c: 1, rough: 0.84, metal: 0.00, nStr: 2.7, fallback: 0x6c4c32 },
+  wovenTwigMudCeiling:     { atlas: 74, r: 0, c: 2, rough: 0.92, metal: 0.00, nStr: 2.8, fallback: 0x8e7454 },
+  charredStoneCeiling:     { atlas: 74, r: 1, c: 0, rough: 0.94, metal: 0.02, nStr: 2.4, fallback: 0x322e2a },
+  mineralSeepVaultWall:    { atlas: 74, r: 1, c: 1, rough: 0.72, metal: 0.04, nStr: 2.5, fallback: 0x7e7256 },
+  brokenPlasterLathHole:   { atlas: 74, r: 1, c: 2, rough: 0.92, metal: 0.02, nStr: 2.9, fallback: 0x847664 },
+  verticalPineLogWall:     { atlas: 74, r: 2, c: 0, rough: 0.86, metal: 0.00, nStr: 2.7, fallback: 0x72563c },
+  ashlarSlateBlockWall:    { atlas: 74, r: 2, c: 1, rough: 0.84, metal: 0.04, nStr: 2.5, fallback: 0x6e6a62 },
+  hangingRootEarthBank:    { atlas: 74, r: 2, c: 2, rough: 0.92, metal: 0.00, nStr: 2.8, fallback: 0x6c543c },
+
+  // === ATLAS 75: Historic Ground & Trail Floors (Variant B) ===
+  packedClayTrailDirt:     { atlas: 75, r: 0, c: 0, rough: 0.94, metal: 0.00, nStr: 2.6, fallback: 0x80644a },
+  goldenStrawBarnFloor:    { atlas: 75, r: 0, c: 1, rough: 0.94, metal: 0.00, nStr: 2.8, fallback: 0x947644 },
+  mossyRoundedCobbles:     { atlas: 75, r: 0, c: 2, rough: 0.88, metal: 0.02, nStr: 2.7, fallback: 0x6e6860 },
+  chippedStoneStaircase:   { atlas: 75, r: 1, c: 0, rough: 0.88, metal: 0.02, nStr: 2.8, fallback: 0x746c60 },
+  rainBootprintMudTrack:   { atlas: 75, r: 1, c: 1, rough: 0.28, metal: 0.06, nStr: 2.6, fallback: 0x5c4634 },
+  burntTimberCharcoalBed:  { atlas: 75, r: 1, c: 2, rough: 0.94, metal: 0.00, nStr: 2.5, fallback: 0x585858 },
+  verticalAgedDeckPlanks:  { atlas: 75, r: 2, c: 0, rough: 0.84, metal: 0.02, nStr: 2.5, fallback: 0x68503c },
+  packedGravelPathway:     { atlas: 75, r: 2, c: 1, rough: 0.90, metal: 0.02, nStr: 2.7, fallback: 0x7c6e5c },
+  crackedRedQuarryTile:    { atlas: 75, r: 2, c: 2, rough: 0.82, metal: 0.02, nStr: 2.5, fallback: 0x96644e },
+
+  // === ATLAS 76: Ruined Decay, Oil Stains & Ancient Shards ===
+  collapsedBrickPlaster:   { atlas: 76, r: 0, c: 0, rough: 0.92, metal: 0.00, nStr: 2.9, fallback: 0x9c8872 },
+  crushedRedBrickRubble:   { atlas: 76, r: 0, c: 1, rough: 0.90, metal: 0.02, nStr: 2.9, fallback: 0x8e5c46 },
+  dustyCobwebConcrete:     { atlas: 76, r: 0, c: 2, rough: 0.90, metal: 0.02, nStr: 2.6, fallback: 0x706c64 },
+  mossyFlakingStucco:      { atlas: 76, r: 1, c: 0, rough: 0.88, metal: 0.00, nStr: 2.7, fallback: 0x767a5c },
+  blackSootRainStreaks:    { atlas: 76, r: 1, c: 1, rough: 0.86, metal: 0.04, nStr: 2.5, fallback: 0x64625c },
+  rainbowOilStainConcrete: { atlas: 76, r: 1, c: 2, rough: 0.24, metal: 0.22, nStr: 2.2, fallback: 0x726c62 },
+  ancientOchreCaveArt:     { atlas: 76, r: 2, c: 0, rough: 0.88, metal: 0.00, nStr: 2.3, fallback: 0xac987e },
+  tricklingMossWaterfall:  { atlas: 76, r: 2, c: 1, rough: 0.34, metal: 0.06, nStr: 2.8, fallback: 0x667048 },
+  ancientPotteryShards:    { atlas: 76, r: 2, c: 2, rough: 0.86, metal: 0.02, nStr: 2.8, fallback: 0x846c56 },
+
+  // === ATLAS 77: Japanese Apartment Living & PC Desk ===
+  woodGlassDishCupboard:   { atlas: 77, r: 0, c: 0, rough: 0.44, metal: 0.08, nStr: 1.8, fallback: 0xb68654 },
+  fridgeDoorCuteMagnets:   { atlas: 77, r: 0, c: 1, rough: 0.30, metal: 0.46, nStr: 1.5, fallback: 0xc4c8cc },
+  indoorLaundryDryingRack: { atlas: 77, r: 0, c: 2, rough: 0.88, metal: 0.14, nStr: 2.0, fallback: 0xc8c4bc },
+  chromeWallTowelBars:     { atlas: 77, r: 1, c: 0, rough: 0.88, metal: 0.18, nStr: 2.2, fallback: 0xcac6be },
+  whiteWindowBlinds:       { atlas: 77, r: 1, c: 1, rough: 0.48, metal: 0.22, nStr: 2.4, fallback: 0xd4d0ca },
+  hinokiKamidanaAltar:     { atlas: 77, r: 1, c: 2, rough: 0.62, metal: 0.06, nStr: 2.1, fallback: 0xc8a472 },
+  pottedHouseplantShelves: { atlas: 77, r: 2, c: 0, rough: 0.72, metal: 0.04, nStr: 2.4, fallback: 0x8ea06c },
+  topDownPcMonitorDesk:    { atlas: 77, r: 2, c: 1, rough: 0.46, metal: 0.18, nStr: 1.8, fallback: 0x9a744e },
+  blueHemSheerCurtain:     { atlas: 77, r: 2, c: 2, rough: 0.88, metal: 0.00, nStr: 1.8, fallback: 0xdce0e4 },
+
+  // === ATLAS 78: Dungeon Stone, Iron Gates & Torch Sconce ===
+  spiralStoneStaircase:    { atlas: 78, r: 0, c: 0, rough: 0.86, metal: 0.02, nStr: 2.9, fallback: 0x6a6456 },
+  mossyDungeonSteps:       { atlas: 78, r: 0, c: 1, rough: 0.88, metal: 0.02, nStr: 2.8, fallback: 0x645e50 },
+  studdedIronCellDoor:     { atlas: 78, r: 0, c: 2, rough: 0.68, metal: 0.64, nStr: 2.8, fallback: 0x5c5448 },
+  crackedStoneRingDoor:    { atlas: 78, r: 1, c: 0, rough: 0.86, metal: 0.14, nStr: 2.7, fallback: 0x76705e },
+  chainedRustyIronCage:    { atlas: 78, r: 1, c: 1, rough: 0.68, metal: 0.72, nStr: 2.9, fallback: 0x685442 },
+  mossyNailedBridgeWood:   { atlas: 78, r: 1, c: 2, rough: 0.86, metal: 0.04, nStr: 2.6, fallback: 0x60523e },
+  heavyRopePostRailing:    { atlas: 78, r: 2, c: 0, rough: 0.90, metal: 0.04, nStr: 2.8, fallback: 0x74664e },
+  rustedIronBarGrate:      { atlas: 78, r: 2, c: 1, rough: 0.66, metal: 0.76, nStr: 2.9, fallback: 0x564638 },
+  ironWallTorchSconce:     { atlas: 78, r: 2, c: 2, rough: 0.72, metal: 0.56, nStr: 2.9, fallback: 0x72644e },
+
+  // === ATLAS 79: Cleanroom, Aerospace & Orbital Lab Modules ===
+  starfieldPortholeWindow: { atlas: 79, r: 0, c: 0, rough: 0.22, metal: 0.58, nStr: 2.0, fallback: 0x6c7480 },
+  pressurizedO2TankRack:   { atlas: 79, r: 0, c: 1, rough: 0.34, metal: 0.66, nStr: 2.3, fallback: 0x7296be },
+  whiteCleanroomHatch:     { atlas: 79, r: 0, c: 2, rough: 0.36, metal: 0.52, nStr: 2.0, fallback: 0xc4c8cc },
+  labAirFiltrationUnit:    { atlas: 79, r: 1, c: 0, rough: 0.36, metal: 0.54, nStr: 2.2, fallback: 0xc2c8ce },
+  fluidRecycleLabPanel:    { atlas: 79, r: 1, c: 1, rough: 0.26, metal: 0.52, nStr: 2.2, fallback: 0x90a4b8 },
+  yellowZeroGWarningSign:  { atlas: 79, r: 1, c: 2, rough: 0.34, metal: 0.26, nStr: 1.7, fallback: 0xe8bc1c },
+  redEmergencyMaskBox:     { atlas: 79, r: 2, c: 0, rough: 0.34, metal: 0.36, nStr: 2.1, fallback: 0xb63c34 },
+  whiteSciFiBulkheadWall:  { atlas: 79, r: 2, c: 1, rough: 0.38, metal: 0.32, nStr: 1.7, fallback: 0xdcdede },
+  steelDeckUtilityTrench:  { atlas: 79, r: 2, c: 2, rough: 0.44, metal: 0.72, nStr: 2.5, fallback: 0x8c9298 },
+
+  // === ATLAS 80: Urban Transit, Safety Doors & Elevators ===
+  tricolorFloorGuideArrows:{ atlas: 80, r: 0, c: 0, rough: 0.62, metal: 0.04, nStr: 1.8, fallback: 0x9a9c9c },
+  dualYellowTactileBlock:  { atlas: 80, r: 0, c: 1, rough: 0.66, metal: 0.02, nStr: 2.7, fallback: 0xebb818 },
+  metroTransitRouteMap:    { atlas: 80, r: 0, c: 2, rough: 0.26, metal: 0.14, nStr: 1.2, fallback: 0xe2e4e6 },
+  greenEmergencyExitDoor:  { atlas: 80, r: 1, c: 0, rough: 0.38, metal: 0.42, nStr: 1.7, fallback: 0x3a764c },
+  redFireAlarmCallPoint:   { atlas: 80, r: 1, c: 1, rough: 0.32, metal: 0.16, nStr: 1.8, fallback: 0xc23830 },
+  classicRedJapanesePost:  { atlas: 80, r: 1, c: 2, rough: 0.30, metal: 0.44, nStr: 1.6, fallback: 0xc83024 },
+  castIronTreeGrateFull:   { atlas: 80, r: 2, c: 0, rough: 0.66, metal: 0.68, nStr: 2.8, fallback: 0x6c6e6a },
+  stainlessParkFountain:   { atlas: 80, r: 2, c: 1, rough: 0.24, metal: 0.86, nStr: 1.5, fallback: 0xb4b6b8 },
+  twinStainlessElevators:  { atlas: 80, r: 2, c: 2, rough: 0.26, metal: 0.78, nStr: 1.7, fallback: 0xb4b0a8 },
+
+  // === ATLAS 81: Volcanic Minerals, Obsidian & Hot Spring ===
+  pinkSpeckledGranite:     { atlas: 81, r: 0, c: 0, rough: 0.68, metal: 0.08, nStr: 2.7, fallback: 0x7e6e68 },
+  wetBlackObsidianRock:    { atlas: 81, r: 0, c: 1, rough: 0.22, metal: 0.20, nStr: 2.8, fallback: 0x3a3c3c },
+  crimsonIronOxideCrust:   { atlas: 81, r: 0, c: 2, rough: 0.56, metal: 0.24, nStr: 2.8, fallback: 0x7e3418 },
+  bandedSedimentaryStrata: { atlas: 81, r: 1, c: 0, rough: 0.84, metal: 0.06, nStr: 2.7, fallback: 0x78563c },
+  crackedBasaltBedrock:    { atlas: 81, r: 1, c: 1, rough: 0.86, metal: 0.06, nStr: 2.7, fallback: 0x726452 },
+  amberQuartzOreVein:      { atlas: 81, r: 1, c: 2, rough: 0.62, metal: 0.16, nStr: 2.8, fallback: 0x945222 },
+  crystallineYellowSulfur: { atlas: 81, r: 2, c: 0, rough: 0.78, metal: 0.04, nStr: 2.8, fallback: 0xd6c656 },
+  steamingTurquoiseSpring: { atlas: 81, r: 2, c: 1, rough: 0.12, metal: 0.10, nStr: 1.9, fallback: 0x5c8c8a },
+  fracturedGlassyObsidian: { atlas: 81, r: 2, c: 2, rough: 0.14, metal: 0.24, nStr: 2.7, fallback: 0x383430 },
+
+  // === ATLAS 82: Ornate Cathedral, Marble & Gold Brocade ===
+  carvedGoldenAltar:       { atlas: 82, r: 0, c: 0, rough: 0.52, metal: 0.42, nStr: 2.6, fallback: 0x9a825c },
+  crimsonGoldVelvetBanner: { atlas: 82, r: 0, c: 1, rough: 0.78, metal: 0.28, nStr: 2.4, fallback: 0x7e281e },
+  blackGoldVeinedMarble:   { atlas: 82, r: 0, c: 2, rough: 0.16, metal: 0.18, nStr: 1.4, fallback: 0x302e2c },
+  creamAlabasterTile:      { atlas: 82, r: 1, c: 0, rough: 0.22, metal: 0.06, nStr: 1.3, fallback: 0xcbc0ac },
+  amberGothicAlabasterWin: { atlas: 82, r: 1, c: 1, rough: 0.24, metal: 0.18, nStr: 2.4, fallback: 0xc29848 },
+  carvedMarblePulpitRelief:{ atlas: 82, r: 1, c: 2, rough: 0.58, metal: 0.12, nStr: 2.6, fallback: 0xa89c86 },
+  redMarbleGoldColumns:    { atlas: 82, r: 2, c: 0, rough: 0.22, metal: 0.34, nStr: 2.1, fallback: 0x8c4434 },
+  gildedGothicOakPanels:   { atlas: 82, r: 2, c: 1, rough: 0.44, metal: 0.22, nStr: 2.4, fallback: 0x6c4c28 },
+  celestialStarVaultMural: { atlas: 82, r: 2, c: 2, rough: 0.52, metal: 0.30, nStr: 1.8, fallback: 0x566480 },
+
+  // === ATLAS 83: Earthen Plaster & Rammed Clay (Variant B) ===
+  rammedEarthOchreWall:    { atlas: 83, r: 0, c: 0, rough: 0.92, metal: 0.00, nStr: 2.4, fallback: 0xa87246 },
+  choppedStrawClayWall:    { atlas: 83, r: 0, c: 1, rough: 0.94, metal: 0.00, nStr: 2.4, fallback: 0xa47a4c },
+  exposedWattleLathMud:    { atlas: 83, r: 0, c: 2, rough: 0.94, metal: 0.00, nStr: 2.8, fallback: 0x987a58 },
+  dryCrackedAdobePlaster:  { atlas: 83, r: 1, c: 0, rough: 0.94, metal: 0.00, nStr: 2.5, fallback: 0xb68a62 },
+  hearthSootClayWall:      { atlas: 83, r: 1, c: 1, rough: 0.94, metal: 0.00, nStr: 2.3, fallback: 0x685442 },
+  terracottaRedEarthWall:  { atlas: 83, r: 1, c: 2, rough: 0.92, metal: 0.00, nStr: 2.4, fallback: 0xa64e2c },
+  peelingWhitewashAdobe:   { atlas: 83, r: 2, c: 0, rough: 0.92, metal: 0.00, nStr: 2.5, fallback: 0xcac0ae },
+  stampedHandprintAdobe:   { atlas: 83, r: 2, c: 1, rough: 0.92, metal: 0.00, nStr: 2.2, fallback: 0xac8660 },
+  erodedDampClayBank:      { atlas: 83, r: 2, c: 2, rough: 0.86, metal: 0.02, nStr: 2.7, fallback: 0x7e6244 },
+
+  // === ATLAS 84: Town Street Furniture, Lockers & Awnings ===
+  sakuraRiverStreetMural:  { atlas: 84, r: 0, c: 0, rough: 0.72, metal: 0.02, nStr: 1.7, fallback: 0x78a4c2 },
+  communityPinnedCorkboard:{ atlas: 84, r: 0, c: 1, rough: 0.86, metal: 0.02, nStr: 2.0, fallback: 0xb28e6c },
+  floralCafeBlueEntryDoor: { atlas: 84, r: 0, c: 2, rough: 0.56, metal: 0.12, nStr: 2.2, fallback: 0x6c7c7e },
+  pastelIceCreamVending:   { atlas: 84, r: 1, c: 0, rough: 0.30, metal: 0.28, nStr: 1.7, fallback: 0xd8c6cc },
+  greenStreetNewsstand:    { atlas: 84, r: 1, c: 1, rough: 0.56, metal: 0.38, nStr: 2.2, fallback: 0x5c8478 },
+  meshUmbrellaStandRack:   { atlas: 84, r: 1, c: 2, rough: 0.42, metal: 0.54, nStr: 2.0, fallback: 0x867e7c },
+  smartParcelPickupLocker: { atlas: 84, r: 2, c: 0, rough: 0.36, metal: 0.52, nStr: 1.8, fallback: 0xb4b8be },
+  pottedJapanesePineBonsai:{ atlas: 84, r: 2, c: 1, rough: 0.74, metal: 0.02, nStr: 2.3, fallback: 0x6e8250 },
+  blueWhiteStripeAwning:   { atlas: 84, r: 2, c: 2, rough: 0.84, metal: 0.00, nStr: 1.9, fallback: 0x628ec8 },
+
+  // === ATLAS 85: Historic Brickwork & Herringbone Pavers ===
+  sunbakedAdobeBricks:     { atlas: 85, r: 0, c: 0, rough: 0.92, metal: 0.00, nStr: 2.6, fallback: 0xa67852 },
+  crumblingMudBrickWall:   { atlas: 85, r: 0, c: 1, rough: 0.94, metal: 0.00, nStr: 2.9, fallback: 0xa27c56 },
+  classicRedClayBrickWall: { atlas: 85, r: 0, c: 2, rough: 0.84, metal: 0.02, nStr: 2.5, fallback: 0x9c4c34 },
+  fireCharredBlackBricks:  { atlas: 85, r: 1, c: 0, rough: 0.90, metal: 0.04, nStr: 2.6, fallback: 0x463c36 },
+  patchworkOldRedBricks:   { atlas: 85, r: 1, c: 1, rough: 0.86, metal: 0.02, nStr: 2.6, fallback: 0x8c5c44 },
+  industrialSootBrickWall: { atlas: 85, r: 1, c: 2, rough: 0.88, metal: 0.04, nStr: 2.5, fallback: 0x4e423c },
+  peelingPlasterRedBrick:  { atlas: 85, r: 2, c: 0, rough: 0.88, metal: 0.00, nStr: 2.6, fallback: 0xa48870 },
+  mossCoveredDarkBrick:    { atlas: 85, r: 2, c: 1, rough: 0.88, metal: 0.00, nStr: 2.7, fallback: 0x5c523c },
+  herringboneRedBrickPaver:{ atlas: 85, r: 2, c: 2, rough: 0.80, metal: 0.02, nStr: 2.5, fallback: 0x945c44 },
+
+  // === ATLAS 86: Weathered Timber, Wicker & Bark Shingles ===
+  silveredDriftwoodPlanks: { atlas: 86, r: 0, c: 0, rough: 0.88, metal: 0.00, nStr: 2.7, fallback: 0x766858 },
+  shouSugiBanCharredWood:  { atlas: 86, r: 0, c: 1, rough: 0.88, metal: 0.02, nStr: 2.7, fallback: 0x2c2826 },
+  rottedHollowDeckBoards:  { atlas: 86, r: 0, c: 2, rough: 0.88, metal: 0.00, nStr: 2.8, fallback: 0x62503e },
+  gnarledRootGrainWood:    { atlas: 86, r: 1, c: 0, rough: 0.86, metal: 0.00, nStr: 2.8, fallback: 0x82644a },
+  deepSplitOldOakTrunk:    { atlas: 86, r: 1, c: 1, rough: 0.88, metal: 0.00, nStr: 2.9, fallback: 0x785c42 },
+  patchedRustHingeShutter: { atlas: 86, r: 1, c: 2, rough: 0.82, metal: 0.14, nStr: 2.6, fallback: 0x745c46 },
+  termiteBoredOldTimber:   { atlas: 86, r: 2, c: 0, rough: 0.90, metal: 0.00, nStr: 2.9, fallback: 0x7e644c },
+  wovenWillowWattleFence:  { atlas: 86, r: 2, c: 1, rough: 0.88, metal: 0.00, nStr: 2.8, fallback: 0x9c7c52 },
+  overlappingBarkShingles: { atlas: 86, r: 2, c: 2, rough: 0.88, metal: 0.00, nStr: 2.8, fallback: 0x7c624e },
+
+  // === ATLAS 87: Polished Luxury Stone, Inlay & Carvings ===
+  glossyBlackMarbleBricks: { atlas: 87, r: 0, c: 0, rough: 0.14, metal: 0.14, nStr: 1.5, fallback: 0x282c30 },
+  goldenSandstoneAshlar:   { atlas: 87, r: 0, c: 1, rough: 0.68, metal: 0.02, nStr: 2.1, fallback: 0xc29254 },
+  polishedGreenSerpentine: { atlas: 87, r: 0, c: 2, rough: 0.20, metal: 0.10, nStr: 1.8, fallback: 0x4e6c54 },
+  romanStarMarbleMosaic:   { atlas: 87, r: 1, c: 0, rough: 0.22, metal: 0.08, nStr: 1.6, fallback: 0x7e6858 },
+  carvedGeometricRelief:   { atlas: 87, r: 1, c: 1, rough: 0.72, metal: 0.04, nStr: 2.7, fallback: 0x7c746a },
+  ancientGlyphStoneTablet: { atlas: 87, r: 1, c: 2, rough: 0.78, metal: 0.02, nStr: 2.5, fallback: 0x927c66 },
+  polishedBrownMarbleCol:  { atlas: 87, r: 2, c: 0, rough: 0.16, metal: 0.12, nStr: 1.5, fallback: 0x7e746a },
+  wornBasaltCobbleFloor:   { atlas: 87, r: 2, c: 1, rough: 0.54, metal: 0.06, nStr: 2.5, fallback: 0x665e54 },
+  crackedBlueSlateMarble:  { atlas: 87, r: 2, c: 2, rough: 0.28, metal: 0.10, nStr: 2.2, fallback: 0x525c62 },
+
+  // === ATLAS 88: Natural Fieldstone & Drystone Masonry ===
+  fittedGraniteFieldstone: { atlas: 88, r: 0, c: 0, rough: 0.88, metal: 0.02, nStr: 2.8, fallback: 0x78726a },
+  mudMortarFieldstone:     { atlas: 88, r: 0, c: 1, rough: 0.90, metal: 0.00, nStr: 2.8, fallback: 0x866e54 },
+  stackedThinSlateWall:    { atlas: 88, r: 0, c: 2, rough: 0.86, metal: 0.04, nStr: 2.9, fallback: 0x766e64 },
+  cyclopeanGraniteBlocks:  { atlas: 88, r: 1, c: 0, rough: 0.88, metal: 0.02, nStr: 2.8, fallback: 0x82786c },
+  roundedRiverCobbleWall:  { atlas: 88, r: 1, c: 1, rough: 0.82, metal: 0.02, nStr: 2.8, fallback: 0x7e766c },
+  mossyCastleStoneWall:    { atlas: 88, r: 1, c: 2, rough: 0.88, metal: 0.00, nStr: 2.8, fallback: 0x6c7252 },
+  crumblingDrystoneRuin:   { atlas: 88, r: 2, c: 0, rough: 0.90, metal: 0.02, nStr: 2.9, fallback: 0x847664 },
+  whiteMortarCountryStone: { atlas: 88, r: 2, c: 1, rough: 0.86, metal: 0.02, nStr: 2.7, fallback: 0x8a8478 },
+  sootDarkenedRuinBlocks:  { atlas: 88, r: 2, c: 2, rough: 0.88, metal: 0.04, nStr: 2.7, fallback: 0x5c5044 },
 };
 
 const _atlasImageCache = new Map();
@@ -919,7 +1084,7 @@ function sliceTileTextures(img, r, c, normalStrength) {
 }
 
 /**
- * Creates a Photographic PBR Material Bank backed by ALL 73 uploaded 3x3 Atlases (657 Tiles).
+ * Creates a Photographic PBR Material Bank backed by ALL 88 uploaded 3x3 Atlases (792 Tiles).
  */
 export function createPbrAtlasBank(preloadAtlasIds = [1, 2, 3, 4, 5, 6, 7, 9, 11, 14, 15]) {
   const matCache = new Map();
@@ -955,7 +1120,7 @@ export function createPbrAtlasBank(preloadAtlasIds = [1, 2, 3, 4, 5, 6, 7, 9, 11
   }
 
   /**
-   * Returns a photorealistic PBR MeshStandardMaterial for any of the 657 catalog tile keys!
+   * Returns a photorealistic PBR MeshStandardMaterial for any of the 792 catalog tile keys!
    */
   function get(key, { repeatX = 1, repeatY = 1, tint = 0xffffff, roughness, metalness } = {}) {
     const spec = PBR_TILE_CATALOG[key] || PBR_TILE_CATALOG.archWhiteConcrete;
@@ -1003,7 +1168,7 @@ export function createPbrAtlasBank(preloadAtlasIds = [1, 2, 3, 4, 5, 6, 7, 9, 11
     get,
     ready,
     tileCount: Object.keys(PBR_TILE_CATALOG).length,
-    atlasCount: 73,
+    atlasCount: 88,
     dispose,
   };
 }
