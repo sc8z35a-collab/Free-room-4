@@ -4,6 +4,7 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh16 = document.getElementById('btn-launch-ch16');
 const btnLaunchCh15 = document.getElementById('btn-launch-ch15');
 const btnLaunchCh14 = document.getElementById('btn-launch-ch14');
 const btnLaunchCh13 = document.getElementById('btn-launch-ch13');
@@ -40,6 +41,7 @@ function returnToMainMenuHub() {
 }
 
 const LOADER_LABELS = {
+  ch16: '次世代340種資産＆792実写PBR『第16章：夢と現実の断崖 —— Sim-to-Realの洗礼（02:30）』を構築中…',
   ch15: '次世代340種資産＆792実写PBR『第15章：仮想空間の四千人の分身（02:30）』を構築中…',
   ch14: '次世代340種資産＆792実写PBR『第14章：黒い金属と炭素の骨格（02:30）』を構築中…',
   ch13: '次世代340種資産＆792実写PBR『第13章：オシロスコープの幽霊（02:30）』を構築中…',
@@ -77,14 +79,21 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch15;
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch16;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch15') {
+    if (kind === 'ch16') {
+      const { mountCh16Film } = await import('./real/ch16/realCh16Film.js');
+      activeSession = mountCh16Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch15') {
       const { mountCh15Film } = await import('./real/ch15/realCh15Film.js');
       activeSession = mountCh15Film({
         initialTime,
@@ -191,6 +200,10 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
     launching = false;
   }
 }
+
+btnLaunchCh16?.addEventListener('click', () => {
+  launchFilm('ch16', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
 
 btnLaunchCh15?.addEventListener('click', () => {
   launchFilm('ch15', { initialTime: 0, startPaused: false, fromUserGesture: true });
