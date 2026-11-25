@@ -4,6 +4,7 @@ const menuHub = document.getElementById('menu-hub');
 const cinemaStage = document.getElementById('cinema-stage');
 const stageLoader = document.getElementById('stage-loader');
 const loaderText = document.getElementById('loader-text');
+const btnLaunchCh15 = document.getElementById('btn-launch-ch15');
 const btnLaunchCh14 = document.getElementById('btn-launch-ch14');
 const btnLaunchCh13 = document.getElementById('btn-launch-ch13');
 const btnLaunchCh12 = document.getElementById('btn-launch-ch12');
@@ -39,6 +40,7 @@ function returnToMainMenuHub() {
 }
 
 const LOADER_LABELS = {
+  ch15: '次世代340種資産＆792実写PBR『第15章：仮想空間の四千人の分身（02:30）』を構築中…',
   ch14: '次世代340種資産＆792実写PBR『第14章：黒い金属と炭素の骨格（02:30）』を構築中…',
   ch13: '次世代340種資産＆792実写PBR『第13章：オシロスコープの幽霊（02:30）』を構築中…',
   ch12: '次世代340種資産＆792実写PBR『第12章：聖夜の閃光と、柔らかい鉄（02:30）』を構築中…',
@@ -75,14 +77,21 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   if (themeMeta) themeMeta.setAttribute('content', '#040508');
 
   if (loaderText) {
-    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch14;
+    loaderText.textContent = LOADER_LABELS[kind] || LOADER_LABELS.ch15;
   }
   stageLoader?.classList.add('visible');
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
-    if (kind === 'ch14') {
+    if (kind === 'ch15') {
+      const { mountCh15Film } = await import('./real/ch15/realCh15Film.js');
+      activeSession = mountCh15Film({
+        initialTime,
+        startPaused,
+        onReturnHub: returnToMainMenuHub,
+      });
+    } else if (kind === 'ch14') {
       const { mountCh14Film } = await import('./real/ch14/realCh14Film.js');
       activeSession = mountCh14Film({
         initialTime,
@@ -183,6 +192,10 @@ async function launchFilm(kind, { initialTime = 0, startPaused = false, fromUser
   }
 }
 
+btnLaunchCh15?.addEventListener('click', () => {
+  launchFilm('ch15', { initialTime: 0, startPaused: false, fromUserGesture: true });
+});
+
 btnLaunchCh14?.addEventListener('click', () => {
   launchFilm('ch14', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
@@ -235,7 +248,7 @@ btnLaunchVoxel?.addEventListener('click', () => {
   launchFilm('voxel', { initialTime: 0, startPaused: false, fromUserGesture: true });
 });
 
-// Deep-link query params (?film=ch11|ch10|ch09|ch08|ch07|ch06|ch05|ch04|hmd|voxel&t=...&paused=1)
+// Deep-link query params (?film=ch15|ch14|ch13|ch12|ch11|...|hmd|voxel&t=...&paused=1)
 const params = new URLSearchParams(window.location.search);
 const queryFilm = params.get('film');
 if (queryFilm && queryFilm in LOADER_LABELS) {
